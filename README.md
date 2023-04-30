@@ -13,3 +13,6 @@
 
 :two: 数据库配置 
 
+:key:
+
+> 1.  Sqlite 支持的格式 是 .sqlite3, 但是  DBBrower 和  Navicate都不支持 ,只能转换成 .sql;   需要使用 `SQLiteStudio`  这个可以 

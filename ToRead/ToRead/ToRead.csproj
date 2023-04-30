@@ -58,6 +58,13 @@
 	  <None Remove="Resources\Images\app_logo.svg" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Pages\" />
+	  <Folder Include="Views\" />
+	  <Folder Include="ViewModels\" />
+	  <Folder Include="Triggers\" />
+	</ItemGroup>
+
 
 	
 

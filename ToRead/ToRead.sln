@@ -4,10 +4,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToRead", "ToRead\ToRead.csproj", "{ED4096E0-6CCA-40BF-AF27-C3A8763A36E6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{86274940-25AF-4AED-A311-C5246E0B8FAA} = {86274940-25AF-4AED-A311-C5246E0B8FAA}
+		{885ADEB7-5CFD-4DA8-85A9-8E378C4E02FC} = {885ADEB7-5CFD-4DA8-85A9-8E378C4E02FC}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToRead.Library", "ToRead.Library\ToRead.Library.csproj", "{86274940-25AF-4AED-A311-C5246E0B8FAA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToReadAPI", "ToReadAPI\ToReadAPI.csproj", "{885ADEB7-5CFD-4DA8-85A9-8E378C4E02FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToRead.xUnitTest", "ToRead.xUnitTest\ToRead.xUnitTest.csproj", "{3A49D3E9-1DA1-47F0-8BA5-4D8FA9C17CAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +35,10 @@ Global
 		{885ADEB7-5CFD-4DA8-85A9-8E378C4E02FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{885ADEB7-5CFD-4DA8-85A9-8E378C4E02FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{885ADEB7-5CFD-4DA8-85A9-8E378C4E02FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A49D3E9-1DA1-47F0-8BA5-4D8FA9C17CAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A49D3E9-1DA1-47F0-8BA5-4D8FA9C17CAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A49D3E9-1DA1-47F0-8BA5-4D8FA9C17CAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A49D3E9-1DA1-47F0-8BA5-4D8FA9C17CAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

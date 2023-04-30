@@ -17,4 +17,27 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <None Remove="toreaddb.db" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="toreaddb.db" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Pages\" />
+	  <Folder Include="Helpers\" />
+	  <Folder Include="Controls\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+	  <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+	  <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.4" />
+	  <PackageReference Include="SQLitePCLRaw.core" Version="2.1.4" />
+	  <PackageReference Include="SQLitePCLRaw.provider.dynamic_cdecl" Version="2.1.4" />
+	  <PackageReference Include="SQLitePCLRaw.provider.sqlite3" Version="2.1.4" />
+	</ItemGroup>
+
 </Project>
