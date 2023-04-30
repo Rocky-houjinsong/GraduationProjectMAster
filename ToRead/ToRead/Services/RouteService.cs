@@ -1,12 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ToRead.Services;
 
-namespace ToRead.Services
+using ToRead.Constants;
+
+/// <summary>
+/// 路由服务
+/// </summary>
+//TODO 理清如何 路由的 , 中等难度
+public class RouteService : IRouteService
 {
-    internal class RouteService
+    public string GetRoute(string pageKey) => _routeDictionary[pageKey];
+
+    private readonly Dictionary<string, string> _routeDictionary = new()
     {
-    }
+        [RootNavigationConstant.AboutPage] = RootNavigationConstant.AboutPage,
+        [ContentNavigationConstant.TodayDetailPage] =
+            $"{RootNavigationConstant.AboutPage}/{ContentNavigationConstant.TodayDetailPage}"
+    };
 }

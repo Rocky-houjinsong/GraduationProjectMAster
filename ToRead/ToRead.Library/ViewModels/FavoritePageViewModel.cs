@@ -1,6 +1,6 @@
 ﻿namespace ToRead.Library.ViewModels
 {
-    internal class FavoritePageViewModel
+    public class FavoritePageViewModel
     {
     }
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToRead.Pages.MorePage"
+             Title="MorePage">
+    <VerticalStackLayout>
+        <Button
+            Text="同步"/>
+        <Button
+            Text="数据分析"/>
+        <Button
+            Text="笔记本"/>
+        <Button
+            Text="设置"/>
+        <Button
+            Text="信息"/>
+        <Button
+            Text="账号退出"/>
+    </VerticalStackLayout>
+</ContentPage>

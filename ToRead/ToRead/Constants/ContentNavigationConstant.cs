@@ -3,7 +3,7 @@
 /// <summary>
 /// 内容导航常量
 /// </summary>
-//TODO 导航常量需要修改, 简单级
+//TODO 导航常量需要修改, 简单
 public static class ContentNavigationConstant
 {
     public const string TodayDetailPage = nameof(TodayDetailPage);

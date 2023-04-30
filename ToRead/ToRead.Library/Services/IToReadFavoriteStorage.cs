@@ -2,7 +2,12 @@
 
 namespace ToRead.Library.Services
 {
-    public interface IFavoriteStorage
+    /// <summary>
+    /// 待读收藏存储接口
+    /// </summary>
+    /// <remarks>需要调教</remarks>
+    //TODO 对收藏存储 功能模块 进行设计和实现
+    public interface IToReadFavoriteStorage
     {
         bool IsInitialized { get; }
 
@@ -16,7 +21,6 @@ namespace ToRead.Library.Services
 
         event EventHandler<FavoriteStorageUpdatedEventArgs> Updated;
     }
-
 
     public class FavoriteStorageUpdatedEventArgs : EventArgs
     {

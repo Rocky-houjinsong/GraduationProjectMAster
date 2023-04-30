@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ToRead.Services;
 
-namespace ToRead.Services
+using ToRead.Library.Services;
+using ToRead.Pages;
+
+public class InitializationNavigationService : IInitializationNavigationService
 {
-    internal class InitializationNavigationSerivice
-    {
-    }
+    private Lazy<InitializationPage> _lazyInitializationPage =
+        new(() => new InitializationPage());
+
+    private Lazy<AppShell> _lazyAppShell = new(() => new AppShell());
+
+    public void NavigateToInitializationPage() =>
+        Application.Current!.MainPage = _lazyInitializationPage.Value;
+
+    public void NavigateToAppShell() =>
+        Application.Current!.MainPage = _lazyAppShell.Value;
 }
