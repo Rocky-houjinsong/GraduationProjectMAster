@@ -3,15 +3,15 @@ using ToRead.Library.Misc;
 
 namespace ToRead.Conoverters;
 
-internal class ItemTappedEventArgsToTRFavoriteConverter : IValueConverter
+public class BytesToImageSourceConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter,
         CultureInfo culture) =>
-        (value as ItemTappedEventArgs)?.Item as PoetryFavorite;
+        value is byte[] bytes
+            ? ImageSource.FromStream(() => new MemoryStream(bytes))
+            : null;
 
     public object ConvertBack(object value, Type targetType, object parameter,
-        CultureInfo culture)
-    {
+        CultureInfo culture) =>
         throw new DoNotCallThisException();
-    }
 }

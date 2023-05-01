@@ -3,17 +3,13 @@ using ToRead.Library.Misc;
 
 namespace ToRead.Conoverters;
 
-public class NegativeBoolConverter : IValueConverter
+class TodayBlogSourceToBoolIConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter,
         CultureInfo culture)
     {
-        if (value is bool b)
-        {
-            return !b;
-        }
-
-        return null;
+        return value is string source && parameter is string expectedSource &&
+               source == expectedSource;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter,

@@ -1,6 +1,10 @@
 ﻿namespace ToRead.Library.Models;
 
-public class TodayRecommendBlog
+/// <summary>
+/// 今日推荐文章类
+/// </summary>
+//TODO 待修改,简单
+public class RecommendBlog
 {
     public string Name { get; set; }
     public string Content { get; set; }

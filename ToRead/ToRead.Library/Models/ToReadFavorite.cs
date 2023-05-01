@@ -16,6 +16,7 @@ namespace ToRead.Library.Models;
 
 #endregion
 
+//TODO 修改 数据库   判定 是否收藏就行了 ,不要很复杂  简单  直接部署
 [Table("toreadfavorite")]
 public class ToReadFavorite : ObservableObject
 {

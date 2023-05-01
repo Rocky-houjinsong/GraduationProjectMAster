@@ -18,24 +18,26 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="todayImage.bin" />
 	  <None Remove="toreaddb.db" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <EmbeddedResource Include="todayImage.bin" />
 	  <EmbeddedResource Include="toreaddb.db" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Pages\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	  <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
 	  <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
 	  <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.4" />
 	  <PackageReference Include="SQLitePCLRaw.core" Version="2.1.4" />
 	  <PackageReference Include="SQLitePCLRaw.provider.dynamic_cdecl" Version="2.1.4" />
 	  <PackageReference Include="SQLitePCLRaw.provider.sqlite3" Version="2.1.4" />
+	  <PackageReference Include="TheSalLab.MauiBehaviors" Version="1.0.2" />
+	  <PackageReference Include="TheSalLab.MauiInfiniteScrolling" Version="1.0.1" />
 	</ItemGroup>
 
 </Project>

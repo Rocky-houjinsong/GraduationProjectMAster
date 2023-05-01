@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using SQLite;
+using System.Linq.Expressions;
 using ToRead.Library.Models;
 
 namespace ToRead.Library.Services
@@ -10,11 +11,42 @@ namespace ToRead.Library.Services
     //TODO 重点重构对象
     public class ToReadItemStorage : IToReadItemStorage
     {
-        public bool IsInitialized { get; }
+        public const int NumberPoetry = 30;
 
-        public Task InitializeAsync()
+        public const string DbName = "poetrydb.sqlite3";
+
+        public static readonly string PoetryDbPath =
+            Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder
+                    .LocalApplicationData), DbName);
+
+        private SQLiteAsyncConnection? _connection;
+
+        private SQLiteAsyncConnection Connection =>
+            _connection ??= new SQLiteAsyncConnection(PoetryDbPath);
+
+        private readonly IPreferenceStorage _preferenceStorage;
+
+        public PoetryStorage(IPreferenceStorage preferenceStorage)
         {
-            throw new NotImplementedException();
+            _preferenceStorage = preferenceStorage;
+        }
+
+        public bool IsInitialized =>
+            _preferenceStorage.Get(PoetryStorageConstant.VersionKey,
+                default(int)) == PoetryStorageConstant.Version;
+
+        public async Task InitializeAsync()
+        {
+            await using var dbFileStream =
+                new FileStream(PoetryDbPath, FileMode.OpenOrCreate);
+            await using var dbAssetStream =
+                typeof(PoetryStorage).Assembly.GetManifestResourceStream(DbName) ??
+                throw new Exception($"Manifest not found: {DbName}");
+            await dbAssetStream.CopyToAsync(dbFileStream);
+
+            _preferenceStorage.Set(PoetryStorageConstant.VersionKey,
+                PoetryStorageConstant.Version);
         }
 
         public Task<ToReadItem> GetToreadAsync(int id)
@@ -22,21 +54,18 @@ namespace ToRead.Library.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<ToReadItem>> GetToreadsAsync(Expression<Func<ToReadItem, bool>> where, int skip,
-            int take)
+        public Task<IEnumerable<ToReadItem>> GetToreadsAsync(Expression<Func<ToReadItem, bool>> where, int skip, int take)
         {
             throw new NotImplementedException();
         }
 
         public bool IsInValid { get; }
-
         public Task InValid(int id)
         {
             throw new NotImplementedException();
         }
 
         public bool IsDelete { get; }
-
         public Task DeleteAsync(int id)
         {
             throw new NotImplementedException();
@@ -52,15 +81,13 @@ namespace ToRead.Library.Services
             throw new NotImplementedException();
         }
 
-        public Task<ToReadItem> GettoreeadAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public Task<Poetry> GetPoetryAsync(int id) =>
+            Connection.Table<Poetry>().FirstOrDefaultAsync(p => p.Id == id);
 
-        public Task<IEnumerable<ToReadItem>> GetPoetriesAsync(Expression<Func<ToReadItem, bool>> where, int skip,
-            int take)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<IEnumerable<Poetry>> GetPoetriesAsync(
+            Expression<Func<Poetry, bool>> where, int skip, int take) =>
+            await Connection.Table<Poetry>().Where(where).Skip(skip).Take(take)
+                .ToListAsync();
+
+        public async Task CloseAsync() => await Connection.CloseAsync();
     }
-}

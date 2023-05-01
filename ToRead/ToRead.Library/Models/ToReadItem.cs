@@ -12,7 +12,7 @@ namespace ToRead.Library.Models;
 
 #endregion
 
-[Table("toreadlist")]
+[SQLite.Table("toreadlist")]
 public class ToReadItem : ObservableObject
 {
     /// <summary>

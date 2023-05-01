@@ -2,6 +2,10 @@
 
 namespace ToRead.Library.Models;
 
+/// <summary>
+/// 待读标签
+/// </summary>
+/// TODO 需要修改  简单级
 [Table("toreadtag")]
 public class ToReadTag
 {

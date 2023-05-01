@@ -1,4 +1,7 @@
-﻿namespace ToRead;
+﻿using ToRead.Constants;
+using ToRead.Views;
+
+namespace ToRead;
 
 public partial class AppShell : Shell
 {
@@ -6,6 +9,39 @@ public partial class AppShell : Shell
     {
         InitializeComponent();
         //TODO 后台如何 进行建立导航栈的?
+        var serviceLocatorName = nameof(ServiceLocator);
+        var serviceLocator =
+            (ServiceLocator)Application.Current.Resources.MergedDictionaries.First(p =>
+                p.ContainsKey(serviceLocatorName))[serviceLocatorName];
+        var routeService = serviceLocator.RouteService;
+
+        AddFlyoutItem("今日推荐",
+            routeService.GetRoute(RootNavigationConstant.TodayPage),
+            typeof(TodayPage));
+        Routing.RegisterRoute(
+            routeService.GetRoute(ContentNavigationConstant.TodayDetailPage),
+            typeof(TodayDetailPage));
+
+        AddFlyoutItem("诗词搜索",
+            routeService.GetRoute(RootNavigationConstant.QueryPage),
+            typeof(QueryPage));
+        Routing.RegisterRoute(
+            routeService.GetRoute(ContentNavigationConstant.ResultPage),
+            typeof(ResultPage));
+        Routing.RegisterRoute(
+            routeService.GetRoute(ContentNavigationConstant.DetailPage),
+            typeof(DetailPage));
+
+        AddFlyoutItem("诗词收藏",
+            routeService.GetRoute(RootNavigationConstant.FavoritePage),
+            typeof(FavoritePage));
+        Routing.RegisterRoute(
+            routeService.GetRoute(ContentNavigationConstant.FavoriteDetailPage),
+            typeof(DetailPage));
+
+        AddFlyoutItem("关于",
+            routeService.GetRoute(RootNavigationConstant.AboutPage),
+            typeof(AboutPage));
     }
 
     private void AddFlyoutItem(string title, string route, Type type) =>

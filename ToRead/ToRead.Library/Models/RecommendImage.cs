@@ -1,6 +1,6 @@
 ﻿namespace ToRead.Library.Models;
 
-public class TodayRecommendImage
+public class RecommendImage
 {
     public string FullStartDate { get; set; } = string.Empty;
 

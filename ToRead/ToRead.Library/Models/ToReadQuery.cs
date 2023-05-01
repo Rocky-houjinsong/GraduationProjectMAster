@@ -1,5 +1,9 @@
 ﻿namespace ToRead.Library.Models;
 
+/// <summary>
+/// 查询条件
+/// </summary>
+//TODO 待调教  简单
 public class ToReadQuery
 {
     /// <summary>
