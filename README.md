@@ -16,3 +16,10 @@
 :key:
 
 > 1.  Sqlite 支持的格式 是 .sqlite3, 但是  DBBrower 和  Navicate都不支持 ,只能转换成 .sql;   需要使用 `SQLiteStudio`  这个可以 
+
+
+
+:three:  学士学位论文, 毕业答辩PPT筹备
+
+【金山文档】 嘉兴学院学士学位论文格式
+https://kdocs.cn/l/ccAHthTXX1wp
