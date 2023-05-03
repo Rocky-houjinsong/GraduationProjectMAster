@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<RootNamespace>ToRead.Library</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="poetrydb.sqlite3" />
+		<None Remove="todayImage.bin" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="poetrydb.sqlite3">
+			<LogicalName>poetrydb.sqlite3</LogicalName>
+		</EmbeddedResource>
+		<EmbeddedResource Include="todayImage.bin">
+			<LogicalName>todayImage.bin</LogicalName>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+		<PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.4" />
+		<PackageReference Include="SQLitePCLRaw.core" Version="2.1.4" />
+		<PackageReference Include="SQLitePCLRaw.provider.dynamic_cdecl" Version="2.1.4" />
+	</ItemGroup>
+
+</Project>

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0"
+      encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:b="clr-namespace:TheSalLab.MauiBehaviors;assembly=TheSalLab.MauiBehaviors"
+             xmlns:lc="clr-namespace:ToRead.Converters"
+             xmlns:scroll="clr-namespace:TheSalLab.MauiInfiniteScrolling;assembly=MauiInfiniteScrolling"
+             x:Class="ToRead.Pages.ResultPage"
+             BindingContext="{Binding ResultPageViewModel, Source={StaticResource ServiceLocator}}"
+             Title="ResultPage">
+    <ContentPage.Behaviors>
+        <b:MauiEventHandlerBehavior EventName="NavigatedTo">
+            <b:MauiActionCollection>
+                <b:MauiInvokeCommandAction
+                    Command="{Binding NavigatedToCommand}">
+                </b:MauiInvokeCommandAction>
+            </b:MauiActionCollection>
+        </b:MauiEventHandlerBehavior>
+    </ContentPage.Behaviors>
+
+    <ContentPage.Resources>
+        <lc:PoetryToStringConverter x:Key="PoetryToString" />
+        <lc:ItemTappedEventArgsToPoetryConverter x:Key="ItemToPoetry" />
+    </ContentPage.Resources>
+
+    <ListView SelectionMode="None"
+              ItemsSource="{Binding PoetryCollection}"
+              RowHeight="64">
+        <ListView.Behaviors>
+            <scroll:MauiInfiniteScrollBehavior />
+            <b:MauiEventHandlerBehavior EventName="ItemTapped">
+                <b:MauiActionCollection>
+                    <b:MauiInvokeCommandAction
+                        Command="{Binding PoetryTappedCommand}"
+                        Converter="{StaticResource ItemToPoetry}" />
+                </b:MauiActionCollection>
+            </b:MauiEventHandlerBehavior>
+        </ListView.Behaviors>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Margin="0,8,8,8">
+                        <Label Text="{Binding Name}"
+                               FontAttributes="Bold" />
+                        <Label
+                            Text="{Binding Converter={StaticResource PoetryToString}}"
+                            LineBreakMode="TailTruncation" />
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+        <ListView.Footer>
+            <StackLayout Padding="8">
+                <Label Text="{Binding Status}"
+                       HorizontalOptions="Center" />
+            </StackLayout>
+        </ListView.Footer>
+    </ListView>
+</ContentPage>
