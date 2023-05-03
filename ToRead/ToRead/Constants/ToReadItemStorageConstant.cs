@@ -1,9 +1,9 @@
 ﻿namespace ToRead.Constants;
 
-class ToReadStorageConstant
+class ToReadItemStorageConstant
 {
     public const string VersionKey =
-        nameof(ToReadStorageConstant) + "." + nameof(Version);
+        nameof(ToReadItemStorageConstant) + "." + nameof(Version);
 
     public const int Version = 1;
 }

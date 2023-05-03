@@ -3,6 +3,9 @@ using ToRead.Library.Misc;
 
 namespace ToRead.Conoverters;
 
+/// <summary>
+/// 导航布尔转换器。
+/// </summary>
 public class NegativeBoolConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter,

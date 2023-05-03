@@ -1,14 +1,15 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using ToRead.Library.Models;
 using ToRead.Library.Services;
 
 namespace ToRead.Library.ViewModels;
 
 internal class RecommendPageViewModel : ObservableObject
 {
-    private ITodayImageService _todayImageService;
+    private IRecommendImageService _todayImageService;
 
-    private ITodayPoetryService _todayPoetryService;
+    private IRecommendBlogService _todayPoetryService;
 
     private IContentNavigationService _contentNavigationService;
 
@@ -16,14 +17,14 @@ internal class RecommendPageViewModel : ObservableObject
 
     private IBrowserService _browserService;
 
-    private TodayImage? _todayImage;
+    private RecommendImage? _todayImage;
 
-    private TodayPoetry? _todayPoetry;
+    private RecommendBlog? _todayPoetry;
 
     private bool _isLoading;
 
-    public TodayPageViewModel(ITodayImageService todayImageService,
-        ITodayPoetryService todayPoetryService,
+    public TodayPageViewModel(IRecommendImageService todayImageService,
+        IRecommendBlogService todayPoetryService,
         IContentNavigationService contentNavigationService,
         IRootNavigationService rootNavigationService,
         IBrowserService browserService)
@@ -49,13 +50,13 @@ internal class RecommendPageViewModel : ObservableObject
                 new AsyncRelayCommand(QueryCommandFunction));
     }
 
-    public TodayImage? TodayImage
+    public RecommendImage? TodayImage
     {
         get => _todayImage;
         set => SetProperty(ref _todayImage, value);
     }
 
-    public TodayPoetry? TodayPoetry
+    public RecommendBlog? TodayPoetry
     {
         get => _todayPoetry;
         set => SetProperty(ref _todayPoetry, value);
@@ -87,7 +88,7 @@ internal class RecommendPageViewModel : ObservableObject
         Task.Run(async () =>
         {
             IsLoading = true;
-            TodayPoetry = await _todayPoetryService.GetTodayPoetryAsync();
+            TodayPoetry = await _todayPoetryService.GetRecommendBlogAsync();
             IsLoading = false;
         });
     }
@@ -122,7 +123,7 @@ internal class RecommendPageViewModel : ObservableObject
     public async Task QueryCommandFunction() =>
         await _rootNavigationService.NavigateToAsync(
             RootNavigationConstant.QueryPage,
-            new PoetryQuery
+            new ToReadQuery
             {
                 Author = TodayPoetry.Author,
                 Name = TodayPoetry.Name

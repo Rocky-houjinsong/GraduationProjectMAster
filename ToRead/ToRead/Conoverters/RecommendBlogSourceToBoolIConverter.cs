@@ -3,7 +3,11 @@ using ToRead.Library.Misc;
 
 namespace ToRead.Conoverters;
 
-class TodayBlogSourceToBoolIConverter : IValueConverter
+/// <summary>
+/// 推荐博客源布尔转换器
+/// </summary>
+/// <remarks>无需修改.</remarks>
+class RecommendBlogSourceToBoolIConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter,
         CultureInfo culture)

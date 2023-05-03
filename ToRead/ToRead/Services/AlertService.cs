@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ToRead.Library.Services;
 
-namespace ToRead.Services
+namespace ToRead.Services;
+
+public class AlertService : IAlertService
 {
-    internal class AlertService
-    {
-    }
+    public void Alert(string title, string message, string button) =>
+        MainThread.BeginInvokeOnMainThread(async () =>
+            await Shell.Current.DisplayAlert(title, message, button));
 }

@@ -7,26 +7,26 @@ namespace ToRead.Library.Services
     /// </summary>
     /// <remarks>需要调教</remarks>
     //TODO 对收藏存储 功能模块 进行设计和实现
-    public interface IToReadFavoriteStorage
+    public interface IFavoriteStorage
     {
         bool IsInitialized { get; }
 
         Task InitializeAsync();
 
-        Task<ToReadFavorite?> GetFavoriteAsync(int poetryId);
+        Task<Favorite?> GetFavoriteAsync(int poetryId);
 
-        Task<IEnumerable<ToReadFavorite>> GetFavoritesAsync();
+        Task<IEnumerable<Favorite>> GetFavoritesAsync();
 
-        Task SaveFavoriteAsync(ToReadFavorite favorite);
+        Task SaveFavoriteAsync(Favorite favorite);
 
         event EventHandler<FavoriteStorageUpdatedEventArgs> Updated;
     }
 
     public class FavoriteStorageUpdatedEventArgs : EventArgs
     {
-        public ToReadFavorite UpdatedFavorite { get; }
+        public Favorite UpdatedFavorite { get; }
 
-        public FavoriteStorageUpdatedEventArgs(ToReadFavorite favorite)
+        public FavoriteStorageUpdatedEventArgs(Favorite favorite)
         {
             UpdatedFavorite = favorite;
         }

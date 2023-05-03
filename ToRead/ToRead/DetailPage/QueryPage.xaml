@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:b="clr-namespace:TheSalLab.MauiBehaviors;assembly=TheSalLab.MauiBehaviors"
              xmlns:lvm="clr-namespace:ToRead.ViewModels;assembly=ToRead.Library"
+             xmlns:viewModels="clr-namespace:ToRead.Library.ViewModels;assembly=ToRead.Library"
              x:Class="ToRead.DetailPage.QueryPage"
              BindingContext="{Binding QueryPageViewModelProxy, Source={StaticResource ServiceLocator}}"
              Title="待读项本地搜索">
@@ -55,7 +56,7 @@
                                 <Picker Grid.Row="0"
                                         Grid.Column="1"
                                         Margin="8,0,4,4"
-                                        ItemsSource="{x:Static lvm:FilterType.FilterTypes}"
+                                        ItemsSource="{x:Static viewModels:FilterType.FilterTypes}"
                                         SelectedItem="{Binding Type}"
                                         ItemDisplayBinding="{Binding Name}" />
                                 <Entry Grid.Row="0"

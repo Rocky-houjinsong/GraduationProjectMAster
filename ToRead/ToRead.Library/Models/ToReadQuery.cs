@@ -6,6 +6,7 @@
 //TODO 待调教  简单
 public class ToReadQuery
 {
+    /*#region 查询对象
     /// <summary>
     /// 标题查询
     /// </summary>
@@ -25,4 +26,11 @@ public class ToReadQuery
     /// 内容查询
     /// </summary>
     public string Content { get; set; }
+
+
+    #endregion*/
+
+    public string Author { get; set; }
+
+    public string Name { get; set; }
 }

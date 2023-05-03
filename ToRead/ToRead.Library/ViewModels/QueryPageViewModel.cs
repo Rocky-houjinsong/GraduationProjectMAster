@@ -1,4 +1,11 @@
-﻿namespace ToRead.Library.ViewModels;
+﻿using System.Collections.ObjectModel;
+using System.Linq.Expressions;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using ToRead.Library.Models;
+using ToRead.Library.Services;
+
+namespace ToRead.Library.ViewModels;
 
 public class QueryPageViewModel : ObservableObject
 {
@@ -19,13 +26,13 @@ public class QueryPageViewModel : ObservableObject
 
     public ObservableCollection<FilterViewModel> FilterViewModelCollection { get; } = new();
 
-    public virtual PoetryQuery? PoetryQuery
+    public virtual ToReadQuery? PoetryQuery
     {
         get => _poetryQuery;
         set => SetProperty(ref _poetryQuery, value);
     }
 
-    private PoetryQuery? _poetryQuery;
+    private ToReadQuery? _poetryQuery;
 
     public AsyncRelayCommand QueryCommand => _lazyQueryCommand.Value;
 
@@ -43,7 +50,7 @@ public class QueryPageViewModel : ObservableObject
         //      && p.Content.Contains("something")
 
         // p
-        var parameter = Expression.Parameter(typeof(Poetry), "p");
+        var parameter = Expression.Parameter(typeof(ToReadItem), "p");
 
         var aggregatedExpression = FilterViewModelCollection
             // Those ViewModels who do have a content.
@@ -64,7 +71,7 @@ public class QueryPageViewModel : ObservableObject
 
         // Turning the expression into a lambda expression
         var where =
-            Expression.Lambda<Func<Poetry, bool>>(aggregatedExpression,
+            Expression.Lambda<Func<ToReadItem, bool>>(aggregatedExpression,
                 parameter);
 
         await contentNavigationService.NavigateToAsync(
@@ -191,13 +198,13 @@ public class FilterViewModel : ObservableObject
 public class FilterType
 {
     public static readonly FilterType NameFilter =
-        new("标题", nameof(Poetry.Name));
+        new("标题", nameof(ToReadItem.Name));
 
     public static readonly FilterType AuthorNameFilter =
-        new("作者", nameof(Poetry.Author));
+        new("作者", nameof(ToReadItem.Author));
 
     public static readonly FilterType ContentFilter =
-        new("内容", nameof(Poetry.Content));
+        new("内容", nameof(ToReadItem.Content));
 
     public static List<FilterType> FilterTypes { get; } =
         new() { NameFilter, AuthorNameFilter, ContentFilter };

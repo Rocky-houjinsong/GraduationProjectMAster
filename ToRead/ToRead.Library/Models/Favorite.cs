@@ -16,19 +16,16 @@ namespace ToRead.Library.Models;
 
 #endregion
 
-//TODO 修改 数据库   判定 是否收藏就行了 ,不要很复杂  简单  直接部署
-[Table("toreadfavorite")]
-public class ToReadFavorite : ObservableObject
+public class Favorite : ObservableObject
 {
     /// <summary>
     /// 待读清单Id,主键
     /// </summary>
-    [Column("itemid")]
-    public int ToReadItemId { get; set; }
+    [PrimaryKey]
+    public int PoetryId { get; set; }
 
     private bool _isFavorite;
 
-    [Column("isfavorite")]
     public virtual bool IsFavorite
     {
         get => _isFavorite;

@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using MvvmHelpers;
+using ToRead.Library.Models;
 using ToRead.Library.Services;
 using ObservableObject = CommunityToolkit.Mvvm.ComponentModel.ObservableObject;
 
@@ -9,12 +10,12 @@ public class FavoritePageViewModel : ObservableObject
 {
     private IFavoriteStorage _favoriteStorage;
 
-    private IPoetryStorage _poetryStorage;
+    private IToReadItemStorage _poetryStorage;
 
     IContentNavigationService _contentNavigationService;
 
     public FavoritePageViewModel(IFavoriteStorage favoriteStorage,
-        IPoetryStorage poetryStorage,
+        IToReadItemStorage poetryStorage,
         IContentNavigationService contentNavigationService)
     {
         _favoriteStorage = favoriteStorage;
@@ -26,11 +27,11 @@ public class FavoritePageViewModel : ObservableObject
         _lazyLoadedCommand =
             new Lazy<AsyncRelayCommand>(
                 new AsyncRelayCommand(LoadedCommandFunction));
-        _layzPoetryTappedCommand = new Lazy<AsyncRelayCommand<PoetryFavorite>>(
-            new AsyncRelayCommand<PoetryFavorite>(PoetryTappedCommandFunction));
+        _layzPoetryTappedCommand = new Lazy<AsyncRelayCommand<ToReadItemFavorite>>(
+            new AsyncRelayCommand<ToReadItemFavorite>(PoetryTappedCommandFunction));
     }
 
-    public ObservableRangeCollection<PoetryFavorite> PoetryFavoriteCollection { get; } = new();
+    public ObservableRangeCollection<ToReadItemFavorite> PoetryFavoriteCollection { get; } = new();
 
     public bool IsLoading
     {
@@ -52,22 +53,22 @@ public class FavoritePageViewModel : ObservableObject
         var favoriteList = await _favoriteStorage.GetFavoritesAsync();
 
         PoetryFavoriteCollection.AddRange((await Task.WhenAll(
-            favoriteList.Select(p => Task.Run(async () => new PoetryFavorite
+            favoriteList.Select(p => Task.Run(async () => new ToReadItemFavorite
             {
-                Poetry = await _poetryStorage.GetPoetryAsync(p.PoetryId),
+                Poetry = await _poetryStorage.GetToReadItemAsync(p.PoetryId),
                 Favorite = p
             })))).ToList());
 
         IsLoading = false;
     }
 
-    public AsyncRelayCommand<PoetryFavorite> PoetryTappedCommand =>
+    public AsyncRelayCommand<ToReadItemFavorite> PoetryTappedCommand =>
         _layzPoetryTappedCommand.Value;
 
-    private Lazy<AsyncRelayCommand<PoetryFavorite>> _layzPoetryTappedCommand;
+    private Lazy<AsyncRelayCommand<ToReadItemFavorite>> _layzPoetryTappedCommand;
 
     public async Task
-        PoetryTappedCommandFunction(PoetryFavorite poetryFavorite) =>
+        PoetryTappedCommandFunction(ToReadItemFavorite poetryFavorite) =>
         await _contentNavigationService.NavigateToAsync(
             ContentNavigationConstant.FavoriteDetailPage,
             poetryFavorite.Poetry);
@@ -86,9 +87,9 @@ public class FavoritePageViewModel : ObservableObject
             return;
         }
 
-        var poetryFavorite = new PoetryFavorite
+        var poetryFavorite = new ToReadItemFavorite
         {
-            Poetry = await _poetryStorage.GetPoetryAsync(favorite.PoetryId),
+            Poetry = await _poetryStorage.GetToReadItemAsync(favorite.PoetryId),
             Favorite = favorite
         };
 
@@ -102,11 +103,4 @@ public class FavoritePageViewModel : ObservableObject
 
         PoetryFavoriteCollection.Insert(index, poetryFavorite);
     }
-}
-
-public class PoetryFavorite
-{
-    public Poetry Poetry { get; set; }
-
-    public Favorite Favorite { get; set; }
 }

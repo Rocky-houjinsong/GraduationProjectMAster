@@ -12,12 +12,12 @@ public class InitializationPageViewModel : ObservableObject
 {
     private IToReadItemStorage _toreadStorage;
 
-    private IToReadFavoriteStorage _favoriteStorage;
+    private IFavoriteStorage _favoriteStorage;
 
     private IInitializationNavigationService _initializationNavigationService;
 
     public InitializationPageViewModel(IToReadItemStorage toreadStorage,
-        IToReadFavoriteStorage favoriteStorage,
+        IFavoriteStorage favoriteStorage,
         IInitializationNavigationService initializationNavigationService)
     {
         _toreadStorage = toreadStorage;

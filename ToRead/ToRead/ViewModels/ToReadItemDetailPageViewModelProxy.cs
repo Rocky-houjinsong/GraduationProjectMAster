@@ -1,4 +1,5 @@
-﻿using ToRead.Library.ViewModels;
+﻿using ToRead.Library.Services;
+using ToRead.Library.ViewModels;
 
 namespace ToRead.ViewModels;
 
@@ -7,4 +8,6 @@ public class DetailPageViewModelProxy : DetailPageViewModel
 {
     public DetailPageViewModelProxy(IFavoriteStorage favoriteStorage) : base(
         favoriteStorage)
-    { }
+    {
+    }
+}

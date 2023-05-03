@@ -12,16 +12,17 @@ namespace ToRead.Library.Models;
 
 #endregion
 
-[SQLite.Table("toreadlist")]
+//[SQLite.Table("toreadlist")]
+[SQLite.Table("works")]
 public class ToReadItem : ObservableObject
 {
+    /*#region 内容主体
+
     /// <summary>
     /// 待读清单Id,主键
     /// </summary>
     [Column("itemid")]
     public int ToReadItemId { get; set; }
-
-    #region 内容主体
 
     /// <summary>
     /// 标题,待读清单.
@@ -80,5 +81,21 @@ public class ToReadItem : ObservableObject
     [Column("invalid")]
     public bool IsInvalid { get; set; } = false;
 
-    #endregion
+    #endregion*/
+
+    [SQLite.Column("id")] public int Id { get; set; }
+
+    [SQLite.Column("name")] public string Name { get; set; } = string.Empty;
+
+    [SQLite.Column("author_name")] public string Author { get; set; } = string.Empty;
+
+    [SQLite.Column("dynasty")] public string Dynasty { get; set; } = string.Empty;
+
+    [SQLite.Column("content")] public string Content { get; set; } = string.Empty;
+
+    private string? _snippet;
+
+    [SQLite.Ignore]
+    public string Snippet =>
+        _snippet ??= Content.Split('。')[0].Replace("\r\n", " ");
 }

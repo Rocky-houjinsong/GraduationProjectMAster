@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using TheSalLab.MauiInfiniteScrolling;
 using ToRead.Constants;
+using ToRead.Library.Models;
 using ToRead.Library.Services;
 
 namespace ToRead.ViewModels;
@@ -10,11 +11,11 @@ namespace ToRead.ViewModels;
 public class ResultPageViewModel : ObservableObject, IQueryAttributable
 {
     public void ApplyQueryAttributes(IDictionary<string, object> query) =>
-        Where = (Expression<Func<Poetry, bool>>)query["parameter"];
+        Where = (Expression<Func<ToReadItem, bool>>)query["parameter"];
 
     private IContentNavigationService _contentNavigationService;
 
-    public ResultPageViewModel(IPoetryStorage poetryStorage,
+    public ResultPageViewModel(IToReadItemStorage poetryStorage,
         IContentNavigationService contentNavigationService)
     {
         _contentNavigationService = contentNavigationService;
@@ -22,10 +23,10 @@ public class ResultPageViewModel : ObservableObject, IQueryAttributable
             new Lazy<AsyncRelayCommand>(
                 new AsyncRelayCommand(NavigatedToCommandFunction));
         _lazyPoetryTappedCommand =
-            new Lazy<AsyncRelayCommand<Poetry>>(
-                new AsyncRelayCommand<Poetry>(PoetryTappedCommandFunction));
+            new Lazy<AsyncRelayCommand<ToReadItem>>(
+                new AsyncRelayCommand<ToReadItem>(PoetryTappedCommandFunction));
 
-        PoetryCollection = new MauiInfiniteScrollCollection<Poetry>
+        PoetryCollection = new MauiInfiniteScrollCollection<ToReadItem>
         {
             OnCanLoadMore = () => _canLoadMore,
             OnLoadMore = async () =>
@@ -51,7 +52,7 @@ public class ResultPageViewModel : ObservableObject, IQueryAttributable
         };
     }
 
-    public MauiInfiniteScrollCollection<Poetry> PoetryCollection { get; }
+    public MauiInfiniteScrollCollection<ToReadItem> PoetryCollection { get; }
 
     private bool _canLoadMore;
 
@@ -71,13 +72,13 @@ public class ResultPageViewModel : ObservableObject, IQueryAttributable
 
     public const string NoMoreResult = "没有更多结果";
 
-    public Expression<Func<Poetry, bool>> Where
+    public Expression<Func<ToReadItem, bool>> Where
     {
         get => _where;
         set => _isNewQuery = SetProperty(ref _where, value);
     }
 
-    private Expression<Func<Poetry, bool>> _where;
+    private Expression<Func<ToReadItem, bool>> _where;
 
     private bool _isNewQuery;
 
@@ -100,12 +101,12 @@ public class ResultPageViewModel : ObservableObject, IQueryAttributable
         await PoetryCollection.LoadMoreAsync();
     }
 
-    public AsyncRelayCommand<Poetry> PoetryTappedCommand =>
+    public AsyncRelayCommand<ToReadItem> PoetryTappedCommand =>
         _lazyPoetryTappedCommand.Value;
 
-    private Lazy<AsyncRelayCommand<Poetry>> _lazyPoetryTappedCommand;
+    private Lazy<AsyncRelayCommand<ToReadItem>> _lazyPoetryTappedCommand;
 
-    public async Task PoetryTappedCommandFunction(Poetry poetry) =>
+    public async Task PoetryTappedCommandFunction(ToReadItem poetry) =>
         await _contentNavigationService.NavigateToAsync(
             ContentNavigationConstant.DetailPage, poetry);
 }

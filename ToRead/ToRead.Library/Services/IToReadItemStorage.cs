@@ -37,7 +37,7 @@ namespace ToRead.Library.Services
         /// <summary>
         /// 获取单个数据
         /// </summary>
-        Task<ToReadItem> GetToreadAsync(int id);
+        Task<ToReadItem> GetToReadItemAsync(int id);
 
         /// <summary>
         /// 获取特定数据集合
@@ -46,10 +46,10 @@ namespace ToRead.Library.Services
         /// <param name="skip">跳过个数</param>
         /// <param name="take">读取个数</param>
         /// <returns></returns>
-        Task<IEnumerable<ToReadItem>> GetToreadsAsync(
+        Task<IEnumerable<ToReadItem>> GetToReadsAsync(
             Expression<Func<ToReadItem, bool>> where, int skip, int take);
 
-        /// <summary>
+        /*/// <summary>
         /// 作废标志位
         /// </summary>
         bool IsInValid { get; }
@@ -70,6 +70,6 @@ namespace ToRead.Library.Services
         /// <summary>
         /// 新增操作
         /// </summary>
-        Task<ToReadItem> NewAsync(int id);
+        Task<ToReadItem> NewAsync(int id);*/
     }
 }

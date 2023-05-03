@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using ToRead.Library.Models;
+using ToRead.Library.Services;
 
 namespace ToRead.Library.ViewModels;
 
@@ -18,13 +20,13 @@ public class DetailPageViewModel : ObservableObject
                 new AsyncRelayCommand(FavoriteToggledCommandFunction));
     }
 
-    public Poetry? Poetry
+    public ToReadItem? Poetry
     {
         get => _poetry;
         set => SetProperty(ref _poetry, value);
     }
 
-    private Poetry? _poetry;
+    private ToReadItem? _poetry;
 
     public Favorite? Favorite
     {

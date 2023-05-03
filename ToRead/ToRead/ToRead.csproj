@@ -54,12 +54,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\AppIcon\appicon.svg" />
-	  <None Remove="Resources\Images\app_logo.svg" />
+	  <AndroidResource Remove="Triggers\**" />
+	  <Compile Remove="Triggers\**" />
+	  <EmbeddedResource Remove="Triggers\**" />
+	  <MauiCss Remove="Triggers\**" />
+	  <MauiXaml Remove="Triggers\**" />
+	  <None Remove="Triggers\**" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Triggers\" />
+	  <None Remove="Resources\AppIcon\appicon.svg" />
+	  <None Remove="Resources\Images\app_logo.svg" />
 	</ItemGroup>
 
 	<ItemGroup>

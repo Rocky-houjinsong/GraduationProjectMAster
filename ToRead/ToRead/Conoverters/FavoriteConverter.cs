@@ -3,6 +3,10 @@
 using System.Globalization;
 using ToRead.Library.Misc;
 
+/// <summary>
+/// 收藏转化器
+/// </summary>
+/// <remarks>无需修改.</remarks>
 public class FavoriteConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

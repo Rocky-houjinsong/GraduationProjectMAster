@@ -27,26 +27,26 @@ namespace ToRead.Library.Services
 
         private readonly IPreferenceStorage _preferenceStorage;
 
-        public PoetryStorage(IPreferenceStorage preferenceStorage)
+        public ToReadItemStorage(IPreferenceStorage preferenceStorage)
         {
             _preferenceStorage = preferenceStorage;
         }
 
         public bool IsInitialized =>
-            _preferenceStorage.Get(PoetryStorageConstant.VersionKey,
-                default(int)) == PoetryStorageConstant.Version;
+            _preferenceStorage.Get(ToReadItemStorageConstant.VersionKey,
+                default(int)) == ToReadItemStorageConstant.Version;
 
         public async Task InitializeAsync()
         {
             await using var dbFileStream =
                 new FileStream(PoetryDbPath, FileMode.OpenOrCreate);
             await using var dbAssetStream =
-                typeof(PoetryStorage).Assembly.GetManifestResourceStream(DbName) ??
+                typeof(ToReadItemStorage).Assembly.GetManifestResourceStream(DbName) ??
                 throw new Exception($"Manifest not found: {DbName}");
             await dbAssetStream.CopyToAsync(dbFileStream);
 
-            _preferenceStorage.Set(PoetryStorageConstant.VersionKey,
-                PoetryStorageConstant.Version);
+            _preferenceStorage.Set(ToReadItemStorageConstant.VersionKey,
+                ToReadItemStorageConstant.Version);
         }
 
         public Task<ToReadItem> GetToreadAsync(int id)
@@ -54,40 +54,15 @@ namespace ToRead.Library.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<ToReadItem>> GetToreadsAsync(Expression<Func<ToReadItem, bool>> where, int skip, int take)
-        {
-            throw new NotImplementedException();
-        }
 
-        public bool IsInValid { get; }
-        public Task InValid(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public Task<ToReadItem> GetPoetryAsync(int id) =>
+            Connection.Table<ToReadItem>().FirstOrDefaultAsync(p => p.Id == id);
 
-        public bool IsDelete { get; }
-        public Task DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ToReadItem> UpdateAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ToReadItem> NewAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Poetry> GetPoetryAsync(int id) =>
-            Connection.Table<Poetry>().FirstOrDefaultAsync(p => p.Id == id);
-
-        public async Task<IEnumerable<Poetry>> GetPoetriesAsync(
-            Expression<Func<Poetry, bool>> where, int skip, int take) =>
-            await Connection.Table<Poetry>().Where(where).Skip(skip).Take(take)
+        public async Task<IEnumerable<ToReadItem>> GetPoetriesAsync(
+            Expression<Func<ToReadItem, bool>> where, int skip, int take) =>
+            await Connection.Table<ToReadItem>().Where(where).Skip(skip).Take(take)
                 .ToListAsync();
 
         public async Task CloseAsync() => await Connection.CloseAsync();
     }
+}

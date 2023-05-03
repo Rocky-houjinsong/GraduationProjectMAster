@@ -1,23 +1,27 @@
-﻿using ToRead.Library.RecommendServices;
+﻿using System.Globalization;
+using System.Text.Json;
+using ToRead.Library.Misc;
+using ToRead.Library.Models;
+using ToRead.Library.RecommendServices;
 
 namespace ToRead.Library.Services;
 
 public class BingImageService : IRecommendImageService
 {
-    private ITodayImageStorage _todayImageStorage;
+    private IRecommendImageStorage _todayImageStorage;
 
     private IAlertService _alertService;
 
     private const string Server = "必应每日图片服务器";
 
-    public BingImageService(ITodayImageStorage todayImageStorage,
+    public BingImageService(IRecommendImageStorage todayImageStorage,
         IAlertService alertService)
     {
         _todayImageStorage = todayImageStorage;
         _alertService = alertService;
     }
 
-    public async Task<TodayImage> GetTodayImageAsync() =>
+    public async Task<RecommendImage> GetTodayImageAsync() =>
         await _todayImageStorage.GetTodayImageAsync(true);
 
     public async Task<TodayImageServiceCheckUpdateResult> CheckUpdateAsync()
@@ -72,7 +76,7 @@ public class BingImageService : IRecommendImageService
                 };
             }
 
-            todayImage = new TodayImage
+            todayImage = new RecommendImage
             {
                 FullStartDate = bingImage.FullStartDate,
                 ExpiresAt = bingImageFullStartDate.AddDays(1),

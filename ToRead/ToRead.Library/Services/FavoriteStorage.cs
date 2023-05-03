@@ -7,7 +7,7 @@ namespace ToRead.Library.Services;
 /// 待读收藏存储类.
 /// </summary>
 //TODO 收藏功能 实现,重点
-public class ToReadFavoriteStorage : IToReadFavoriteStorage
+public class FavoriteStorage : IFavoriteStorage
 {
     public const string DbName = "favoritedb.sqlite3";
 
@@ -16,7 +16,8 @@ public class ToReadFavoriteStorage : IToReadFavoriteStorage
             Environment.GetFolderPath(Environment.SpecialFolder
                 .LocalApplicationData), DbName);
 
-    public Task SaveFavoriteAsync(ToReadFavorite favorite)
+
+    public Task SaveFavoriteAsync(Favorite favorite)
     {
         throw new NotImplementedException();
     }
@@ -30,7 +31,7 @@ public class ToReadFavoriteStorage : IToReadFavoriteStorage
 
     private readonly IPreferenceStorage _preferenceStorage;
 
-    public ToReadFavoriteStorage(IPreferenceStorage preferenceStorage)
+    public FavoriteStorage(IPreferenceStorage preferenceStorage)
     {
         _preferenceStorage = preferenceStorage;
     }
@@ -41,30 +42,31 @@ public class ToReadFavoriteStorage : IToReadFavoriteStorage
 
     public async Task InitializeAsync()
     {
-        await Connection.CreateTableAsync<ToReadFavorite>();
+        await Connection.CreateTableAsync<Favorite>();
         _preferenceStorage.Set(FavoriteStorageConstant.VersionKey,
             FavoriteStorageConstant.Version);
     }
 
-    Task<ToReadFavorite> IToReadFavoriteStorage.GetFavoriteAsync(int poetryId)
+    Task<Favorite?> IFavoriteStorage.GetFavoriteAsync(int poetryId)
     {
         throw new NotImplementedException();
     }
 
-    Task<IEnumerable<ToReadFavorite>> IToReadFavoriteStorage.GetFavoritesAsync()
+    Task<IEnumerable<Favorite>> IFavoriteStorage.GetFavoritesAsync()
     {
         throw new NotImplementedException();
     }
 
-    public async Task<ToReadFavorite?> GetFavoriteAsync(int poetryId) =>
-        await Connection.Table<ToReadFavorite>()
+
+    public async Task<Favorite?> GetFavoriteAsync(int poetryId) =>
+        await Connection.Table<Favorite>()
             .FirstOrDefaultAsync(p => p.PoetryId == poetryId);
 
-    public async Task<IEnumerable<ToReadFavorite>> GetFavoritesAsync() =>
-        await Connection.Table<ToReadFavorite>().Where(p => p.IsFavorite)
+    public async Task<IEnumerable<Favorite>> GetFavoritesAsync() =>
+        await Connection.Table<Favorite>().Where(p => p.IsFavorite)
             .OrderByDescending(p => p.Timestamp).ToListAsync();
 
-    public async Task SaveFavoriteAsync(ToReadFavorite favorite)
+    public async Task SaveFavoriteAsync(Favorite favorite)
     {
         favorite.Timestamp = DateTime.Now.Ticks;
         await Connection.InsertOrReplaceAsync(favorite);

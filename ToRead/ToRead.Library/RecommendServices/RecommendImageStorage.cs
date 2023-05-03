@@ -105,4 +105,14 @@ public class RecommendImageStorage : IRecommendImageStorage
         await imageFileStream.WriteAsync(RecommendImage.ImageBytes, 0,
             RecommendImage.ImageBytes.Length);
     }
+
+    public Task<RecommendImage> GetTodayImageAsync(bool includingImageStream)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task SaveTodayImageAsync(RecommendImage todayImage, bool savingExpiresAtOnly)
+    {
+        throw new NotImplementedException();
+    }
 }
