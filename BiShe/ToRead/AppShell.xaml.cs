@@ -44,6 +44,12 @@ public partial class AppShell : Shell
             typeof(AboutPage));
     }
 
+    /// <summary>
+    /// 创建FlyoutItem,含单个Items
+    /// </summary>
+    /// <param name="title"></param>
+    /// <param name="route"></param>
+    /// <param name="type"></param>
     private void AddFlyoutItem(string title, string route, Type type) =>
         Items.Add(new FlyoutItem
         {

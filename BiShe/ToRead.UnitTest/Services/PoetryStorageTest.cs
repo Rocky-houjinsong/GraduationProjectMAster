@@ -7,13 +7,15 @@ using Xunit;
 
 namespace ToRead.UnitTest.Services;
 
-public class PoetryStorageTest : IDisposable {
+public class PoetryStorageTest : IDisposable
+{
     public PoetryStorageTest() => PoetryStorageHelper.RemoveDatabaseFile();
 
     public void Dispose() => PoetryStorageHelper.RemoveDatabaseFile();
 
     [Fact]
-    public void IsInitialized_Default() {
+    public void IsInitialized_Default()
+    {
         var preferenceStorageMock = new Mock<IPreferenceStorage>();
         preferenceStorageMock
             .Setup(p => p.Get(PoetryStorageConstant.VersionKey, default(int)))
@@ -29,7 +31,8 @@ public class PoetryStorageTest : IDisposable {
     }
 
     [Fact]
-    public async Task InitializeAsync_Default() {
+    public async Task InitializeAsync_Default()
+    {
         var preferenceStorageMock = new Mock<IPreferenceStorage>();
         var mockPreferenceStorage = preferenceStorageMock.Object;
 
@@ -45,7 +48,8 @@ public class PoetryStorageTest : IDisposable {
     }
 
     [Fact]
-    public async Task GetPoetryAsync_Default() {
+    public async Task GetPoetryAsync_Default()
+    {
         var poetryStorage = await PoetryStorageHelper
             .GetInitializedPoetryStorage();
         var poetry = await poetryStorage.GetPoetryAsync(10001);
@@ -54,7 +58,8 @@ public class PoetryStorageTest : IDisposable {
     }
 
     [Fact]
-    public async Task GetPoetriesAsync_Default() {
+    public async Task GetPoetriesAsync_Default()
+    {
         var poetryStorage =
             await PoetryStorageHelper.GetInitializedPoetryStorage();
         var poetries = await poetryStorage.GetPoetriesAsync(

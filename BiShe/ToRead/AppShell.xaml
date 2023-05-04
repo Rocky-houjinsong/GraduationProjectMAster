@@ -4,6 +4,30 @@
 <Shell x:Class="ToRead.AppShell"
        xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:ToRead.Views"
        FlyoutBehavior="Flyout">
+    <!--Header视图-->
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <views:FlyoutHeaderView/>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+    <!--Menu Items视图-->
+    <!--直接在AppShell中编写,顺序是 FlyoutItem,ShellContent,MenuItem-->
+    <!--MenuItem控件不能直接嵌套在ShellContent中-->
+    <!--与一个名为 D_FAULT_ShellContent2 的 ShellContent 有关。
+     Microsoft.Maui.Controls.Xaml.dll 应该是用于为应用程序构建用户界面的库。
+    根据异常信息，它指出 ShellContent 类型的 Content 属性应该是一个 Page 的实例-->
+    <!--<FlyoutItem Title="Menu">
+        <ShellContent>
+            <views:FlyoutMenuItemsView></views:FlyoutMenuItemsView>
+        </ShellContent>
+    </FlyoutItem>-->
+        <!--Footer视图-->
+    <Shell.FlyoutFooterTemplate>
+        <DataTemplate>
+            <views:FlyoutFooterView/>
+        </DataTemplate>
+    </Shell.FlyoutFooterTemplate>
 
 </Shell>

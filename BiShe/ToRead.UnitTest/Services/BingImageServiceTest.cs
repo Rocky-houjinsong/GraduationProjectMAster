@@ -5,10 +5,13 @@ using Xunit;
 
 namespace ToRead.UnitTest.Services;
 
-public class BingImageServiceTest {
+public class BingImageServiceTest
+{
     [Fact(Skip = "依赖远程服务的测试")]
-    public async Task CheckUpdateAsync_TodayImageNotExpired() {
-        var todayImageToReturn = new TodayImage {
+    public async Task CheckUpdateAsync_TodayImageNotExpired()
+    {
+        var todayImageToReturn = new TodayImage
+        {
             FullStartDate = "197001010000",
             ExpiresAt = DateTime.Now + TimeSpan.FromHours(1),
             Copyright = "Copyright",
@@ -39,8 +42,10 @@ public class BingImageServiceTest {
     }
 
     [Fact(Skip = "依赖远程服务的测试")]
-    public async Task CheckUpdateAsync_TodayImageExpired() {
-        var todayImageToReturn = new TodayImage {
+    public async Task CheckUpdateAsync_TodayImageExpired()
+    {
+        var todayImageToReturn = new TodayImage
+        {
             FullStartDate = "197001010000",
             ExpiresAt = DateTime.Now - TimeSpan.FromHours(1),
             Copyright = "Copyright",

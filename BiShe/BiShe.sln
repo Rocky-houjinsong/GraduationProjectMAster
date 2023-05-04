@@ -8,6 +8,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToRead.Library", "ToRead.Library\ToRead.Library.csproj", "{A51199CE-001F-4CE0-8C56-2D02B278EA17}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToRead.UnitTest", "ToRead.UnitTest\ToRead.UnitTest.csproj", "{69DB2704-1C8F-4D52-9E66-8B48D3044B78}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A51199CE-001F-4CE0-8C56-2D02B278EA17} = {A51199CE-001F-4CE0-8C56-2D02B278EA17}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToRead.RESTAPI", "ToRead.RESTAPI\ToRead.RESTAPI.csproj", "{C97803C7-5B57-47ED-9B05-E97D56FA68B4}"
 EndProject

@@ -6,16 +6,16 @@ using Xunit;
 
 namespace ToRead.UnitTest.Services;
 
-public class FavoriteStorageTest : IDisposable {
-    public FavoriteS
-orageTest() => FavoriteStorageHelper.RemoveDatabaseFile();
+public class FavoriteStorageTest : IDisposable
+{
+    public FavoriteStorageTest() => FavoriteStorageHelper.RemoveDatabaseFile();
 
     public void Dispose() => FavoriteStorageHelper.RemoveDatabaseFile();
 
     [Fact]
-    public async Task IsInitialized_Default() {
-        var preferen
-    eStorageMock = new Mock<IPreferenceStorage>();
+    public async Task IsInitialized_Default()
+    {
+        var preferenceStorageMock = new Mock<IPreferenceStorage>();
         preferenceStorageMock
             .Setup(p => p.Get(FavoriteStorageConstant.VersionKey, default(int)))
             .Returns(FavoriteStorageConstant.Version);
@@ -26,9 +26,9 @@ orageTest() => FavoriteStorageHelper.RemoveDatabaseFile();
     }
 
     [Fact]
-    public async Task InitializeAsync_Default() {
-        var favorite
-    torage = new FavoriteStorage(GetEmptyPreferenceStorage());
+    public async Task InitializeAsync_Default()
+    {
+        var favoriteStorage = new FavoriteStorage(GetEmptyPreferenceStorage());
         Assert.False(File.Exists(Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder
                 .LocalApplicationData), FavoriteStorage.DbName)));
@@ -42,15 +42,15 @@ orageTest() => FavoriteStorageHelper.RemoveDatabaseFile();
     }
 
     [Fact]
-    public async Task SaveFavoriteAsync_GetFavoriteAsync_Default() {
-        var updated 
-     false;
+    public async Task SaveFavoriteAsync_GetFavoriteAsync_Default()
+    {
+        var updated = false;
         Favorite updatedFavorite = null;
 
         var favoriteStorage = new FavoriteStorage(GetEmptyPreferenceStorage());
-        favoriteStorage.Updated += (_, args) => {
-            updated 
-         true;
+        favoriteStorage.Updated += (_, args) =>
+        {
+            updated = true;
             updatedFavorite = args.UpdatedFavorite;
         };
         await favoriteStorage.InitializeAsync();
@@ -75,18 +75,19 @@ orageTest() => FavoriteStorageHelper.RemoveDatabaseFile();
     }
 
     [Fact]
-    public async Task GetFavoritesAsync_Default() {
-        var favorite
-    torage = new FavoriteStorage(GetEmptyPreferenceStorage());
+    public async Task GetFavoritesAsync_Default()
+    {
+        var favoriteStorage = new FavoriteStorage(GetEmptyPreferenceStorage());
         await favoriteStorage.InitializeAsync();
 
         var favoriteListToSave = new List<Favorite>();
         var random = new Random();
-        for (var i = 0; i < 5; i++) {
-            favorite
-        istToSave.Add(new Favorite {
-                Poet
-            yId = i, IsFavorite = random.NextDouble() > 0.5
+        for (var i = 0; i < 5; i++)
+        {
+            favoriteListToSave.Add(new Favorite
+            {
+                PoetryId = i,
+                IsFavorite = random.NextDouble() > 0.5
             });
             await Task.Delay(10);
         }
@@ -94,16 +95,16 @@ orageTest() => FavoriteStorageHelper.RemoveDatabaseFile();
         var favoriteDictionary = favoriteListToSave.Where(p => p.IsFavorite)
             .ToDictionary(p => p.PoetryId, p => true);
 
-        foreach (var favoriteToSave in favoriteListToSave) {
-            await fa
-        oriteStorage.SaveFavoriteAsync(favoriteToSave);
+        foreach (var favoriteToSave in favoriteListToSave)
+        {
+            await favoriteStorage.SaveFavoriteAsync(favoriteToSave);
         }
 
         var favoriteList = await favoriteStorage.GetFavoritesAsync();
         Assert.Equal(favoriteDictionary.Count, favoriteList.Count());
-        foreach (var favorite in favoriteList) {
-            Assert.T
-        ue(favoriteDictionary.ContainsKey(favorite.PoetryId));
+        foreach (var favorite in favoriteList)
+        {
+            Assert.True(favoriteDictionary.ContainsKey(favorite.PoetryId));
         }
 
         await favoriteStorage.CloseAsync();
