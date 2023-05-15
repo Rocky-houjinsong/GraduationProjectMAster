@@ -5,6 +5,7 @@
        xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:views="clr-namespace:ToRead.Views"
+       xmlns:pages="clr-namespace:ToRead.Pages"
        FlyoutBehavior="Flyout">
     <!--Header视图-->
     <Shell.FlyoutHeaderTemplate>
@@ -24,6 +25,12 @@
         </ShellContent>
     </FlyoutItem>-->
         <!--Footer视图-->
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <Tab Title="登录注册">
+            <ShellContent ContentTemplate="{DataTemplate pages:RegisterPage}" />
+            <ShellContent ContentTemplate="{DataTemplate pages:LoginPage}" />
+        </Tab>
+    </FlyoutItem>
     <Shell.FlyoutFooterTemplate>
         <DataTemplate>
             <views:FlyoutFooterView/>
