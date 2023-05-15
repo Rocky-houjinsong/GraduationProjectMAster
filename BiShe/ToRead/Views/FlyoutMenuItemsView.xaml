@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToRead.Views.FlyoutMenuItemsView">
+    <Grid BackgroundColor="#991149" HeightRequest="120">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!-- Menu items -->
+        <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+
+            <Label Text="本机设备功能" FontSize="16" TextColor="White" Margin="20,0,20,0">
+                <!--<Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding EssentialCommand}"/>
+                </Label.GestureRecognizers>-->
+            </Label>
+
+            <Label Text="模块学习" FontSize="16" TextColor="White" Margin="20,0,20,0">
+                <!--<Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding LearnCommand}"/>
+                </Label.GestureRecognizers>-->
+            </Label>
+
+            <Label Text="SDK绑定" FontSize="16" TextColor="White" Margin="20,0,20,0">
+                <!--<Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SDKCommand}"/>
+                </Label.GestureRecognizers>-->
+            </Label>
+            <Label Text="设置" FontSize="16" TextColor="White" Margin="20,0,20,0">
+                <!--<Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SettingsCommand}"/>
+                </Label.GestureRecognizers>-->
+            </Label>
+        </StackLayout>
+    </Grid>
+
+</ContentView>

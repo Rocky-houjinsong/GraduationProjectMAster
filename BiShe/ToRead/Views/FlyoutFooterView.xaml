@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToRead.Views.FlyoutFooterView">
+    <!--Grid布局来创建Header视图，包含一个Logo图片和一些菜单项。
+    Image和Label控件被用来显示这些元素，
+    并且我们使用了TapGestureRecognizer将它们绑定到ViewModel中的对应命令-->
+    <Grid BackgroundColor="#2196F3" HeightRequest="120">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header logo or image -->
+        <Label Grid.Row="0">填充项</Label>
+    </Grid>
+</ContentView>
