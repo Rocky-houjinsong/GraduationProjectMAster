@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:ToRead.Modules.Models"
+             x:Class="ToRead.Modules.Pages.ListViewDataBindingPage"
+             Title="ListViewDataBindingPage">
+    <ContentPage.Resources>
+        <x:Double x:Key="boxSize">50</x:Double>
+        <x:Int32 x:Key="rowHeight">60</x:Int32>
+        <models:FloatToIntConverter x:Key="intConverter" />
+    </ContentPage.Resources>
+    <!--此时 默认调用ToString方法,显示内容为  Learn.Models.NamedColor; 
+            这些项目的类型为XamlSamples.NamedColor  显示的是     类型-->
+    <!--<ListView ItemsSource="{x:Static local:NamedColor.All}"/>-->
+
+
+
+    <!--此时 显示内容为  Learn.Models.NamedColor类的 FriendlyName 
+                        显示 FriendlyName 每个 NamedColor 对象的 属性
+        Label元素被设置为ViewCell的View属性。不需要ViewCell.View标记，
+        因为View属性是ViewCell的内容属性-->
+    <!--<ListView ItemsSource="{x:Static local:NamedColor.All}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Label Text="{Binding FriendlyName}" />
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>-->
+
+
+
+    <!--可以展开项模板以显示详细信息和实际颜色-->
+    <ListView ItemsSource="{x:Static models:NamedColor.All}"
+              RowHeight="{StaticResource rowHeight}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Padding="5, 5, 0, 5"
+                                 Orientation="Horizontal"
+                                 Spacing="15">
+                        <BoxView WidthRequest="{StaticResource boxSize}"
+                                 HeightRequest="{StaticResource boxSize}"
+                                 Color="{Binding Color}" />
+                        <StackLayout Padding="5, 0, 0, 0"
+                                     VerticalOptions="Center">
+                            <Label Text="{Binding FriendlyName}"
+                                   FontAttributes="Bold"
+                                   FontSize="14" />
+                            <StackLayout Orientation="Horizontal"
+                                         Spacing="0">
+                                <Label Text="{Binding Red,
+                                                      Converter={StaticResource intConverter},
+                                                      ConverterParameter=255,
+                                                      StringFormat='R={0:X2}'}" />
+                                <Label Text="{Binding Green,
+                                                      Converter={StaticResource intConverter},
+                                                      ConverterParameter=255,
+                                                      StringFormat=', G={0:X2}'}" />
+                                <Label Text="{Binding Blue,
+                                                      Converter={StaticResource intConverter},
+                                                      ConverterParameter=255,
+                                                      StringFormat=', B={0:X2}'}" />
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>

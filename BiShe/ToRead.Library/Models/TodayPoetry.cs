@@ -1,4 +1,6 @@
-﻿namespace ToRead.Models;
+﻿using ToRead.Services;
+
+namespace ToRead.Models;
 
 public class TodayPoetry
 {

@@ -53,12 +53,26 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="TheSalLab.MauiBehaviors" Version="1.0.2" />
-	  <PackageReference Include="TheSalLab.MauiInfiniteScrolling" Version="1.0.1" />
+	  <None Remove="Resources\Images\about.svg" />
+	  <None Remove="Resources\Images\code.svg" />
+	  <None Remove="Resources\Images\collectionpage.svg" />
+	  <None Remove="Resources\Images\help.svg" />
+	  <None Remove="Resources\Images\login.svg" />
+	  <None Remove="Resources\Images\recommend.svg" />
+	  <None Remove="Resources\Images\register.svg" />
+	  <None Remove="Resources\Images\searchpage.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="TheSalLab.MauiBehaviors" Version="1.0.2" />
+	  <PackageReference Include="TheSalLab.MauiInfiniteScrolling" Version="1.0.1" />
+	  <PackageReference Include="Xamarin.Essentials" Version="1.7.5" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\DeviceAPI.Service\DeviceAPI.csproj" />
 	  <ProjectReference Include="..\ToRead.Library\ToRead.Library.csproj" />
+	  <ProjectReference Include="..\ToRead.Modules\Module.Demo.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -66,6 +80,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\ModelsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\RegisterPage.xaml">
@@ -99,6 +116,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\FlyoutMenuItemsView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MenuItemTemplate.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

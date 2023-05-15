@@ -86,6 +86,9 @@
                             Text="查看详细"
                             Command="{Binding ShowDetailCommand}"
                             VerticalOptions="Center" />
+                    <Button Margin="0,0,0,8"
+                            Text="分享"/>
+                          <!--  Command="{Binding ShareCommand}" CommandParameter="{Binding ObjectValue}"/>-->
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal"

@@ -18,14 +18,14 @@ public partial class AppShell : Shell
 
         AddFlyoutItem("今日推荐",
             routeService.GetRoute(RootNavigationConstant.TodayPage),
-            typeof(TodayPage));
+            typeof(TodayPage), "recommend.png");
         Routing.RegisterRoute(
             routeService.GetRoute(ContentNavigationConstant.TodayDetailPage),
             typeof(TodayDetailPage));
 
         AddFlyoutItem("诗词搜索",
             routeService.GetRoute(RootNavigationConstant.QueryPage),
-            typeof(QueryPage));
+            typeof(QueryPage), "searchpage.png");
         Routing.RegisterRoute(
             routeService.GetRoute(ContentNavigationConstant.ResultPage),
             typeof(ResultPage));
@@ -35,20 +35,20 @@ public partial class AppShell : Shell
 
         AddFlyoutItem("诗词收藏",
             routeService.GetRoute(RootNavigationConstant.FavoritePage),
-            typeof(FavoritePage));
+            typeof(FavoritePage), "collectionpage.png");
         Routing.RegisterRoute(
             routeService.GetRoute(ContentNavigationConstant.FavoriteDetailPage),
             typeof(DetailPage));
 
         AddFlyoutItem("关于",
             routeService.GetRoute(RootNavigationConstant.AboutPage),
-            typeof(AboutPage));
-        AddFlyoutItem("登录",
+            typeof(AboutPage), "about.png");
+        /*AddFlyoutItem("登录",
             routeService.GetRoute(RootNavigationConstant.LoginPage),
-            typeof(LoginPage));
+            typeof(LoginPage), "login.png");
         AddFlyoutItem("注册",
             routeService.GetRoute(RootNavigationConstant.RegisterPage),
-            typeof(RegisterPage));
+            typeof(RegisterPage), "register.png");*/
     }
 
     /// <summary>
@@ -57,7 +57,7 @@ public partial class AppShell : Shell
     /// <param name="title"></param>
     /// <param name="route"></param>
     /// <param name="type"></param>
-    private void AddFlyoutItem(string title, string route, Type type) =>
+    private void AddFlyoutItem(string title, string route, Type type, string icon) =>
         Items.Add(new FlyoutItem
         {
             Title = title,
@@ -65,6 +65,7 @@ public partial class AppShell : Shell
             Items =
             {
                 new ShellContent { ContentTemplate = new DataTemplate(type) }
-            }
+            },
+            Icon = icon
         });
 }

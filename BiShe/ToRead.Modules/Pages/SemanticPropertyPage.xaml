@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToRead.Modules.Pages.SemanticPropertyPage"
+             Background="Gray"
+             Title="SemanticPropertyPage">
+    <VerticalStackLayout>
+        <!--SemanticProperties.Description 元素的简短描述性 -->
+        <Image Source="dotnet_bot.png"
+               WidthRequest="150"
+               HeightRequest="150"
+               SemanticProperties.Description="Cute dot net bot waving hi to you!" />
+        <Label x:Name="label"
+               Text="Enter your name: " />
+        <Entry SemanticProperties.Description="{Binding Source={x:Reference label} ,Path=Text}" />
+        <!--SemanticProperties.Hint 提供附加上下文-->
+        <Image Source="like.png"
+               WidthRequest="150"
+               HeightRequest="150"
+               SemanticProperties.Description="Like"
+               SemanticProperties.Hint="Like this post." />
+        <!--SemanticProperties.HeadingLevel 提供标题级别-->
+        <Label Text="Get started with .NET MAUI"
+               SemanticProperties.HeadingLevel="Level1" />
+        <Label Text="Paragraphs of text go here." />
+        <Label Text="Installation"
+               SemanticProperties.HeadingLevel="Level2" />
+    </VerticalStackLayout>
+</ContentPage>

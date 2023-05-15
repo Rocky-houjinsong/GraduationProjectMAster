@@ -10,6 +10,10 @@ public partial class App : Application
         //MainPage = new  AppShell();
         //改用 MAUI原有的导航机制,自建导航栈
         MainPage = new NavigationPage(new ContentPage());
+
+
+        #region 自建依赖容器
+
         //获取自建 依赖容器名
         var serviceLocatorName = nameof(ServiceLocator);
         //反射,根据 依赖容器名,依赖容器对象实例化
@@ -30,5 +34,11 @@ public partial class App : Application
         {
             initializationNavigationService.NavigateToAppShell();
         }
+
+        #endregion
+
+        #region 系统API服务
+
+        #endregion
     }
 }

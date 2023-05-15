@@ -1,11 +1,12 @@
-<?xml version="1.0"
-      encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <Shell x:Class="ToRead.AppShell"
        xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:views="clr-namespace:ToRead.Views"
        xmlns:pages="clr-namespace:ToRead.Pages"
+       xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+       FlyoutBackground="LightGray"
        FlyoutBehavior="Flyout">
     <!--Header视图-->
     <Shell.FlyoutHeaderTemplate>
@@ -19,22 +20,51 @@
     <!--与一个名为 D_FAULT_ShellContent2 的 ShellContent 有关。
      Microsoft.Maui.Controls.Xaml.dll 应该是用于为应用程序构建用户界面的库。
     根据异常信息，它指出 ShellContent 类型的 Content 属性应该是一个 Page 的实例-->
-    <!--<FlyoutItem Title="Menu">
-        <ShellContent>
-            <views:FlyoutMenuItemsView></views:FlyoutMenuItemsView>
-        </ShellContent>
-    </FlyoutItem>-->
-        <!--Footer视图-->
-    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+    <TabBar Title="功能展示" Icon="code.png">
+        <Tab Title="基础模块">
+            <ShellContent ContentTemplate="{DataTemplate pages:ModelsPage}" />
+        </Tab>
+        <Tab Title="系统API">
+            <ShellContent ContentTemplate="{DataTemplate pages:ModelsPage}" />
+        </Tab>
+    </TabBar>
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Title="登录注册">
         <Tab Title="登录注册">
-            <ShellContent ContentTemplate="{DataTemplate pages:RegisterPage}" />
-            <ShellContent ContentTemplate="{DataTemplate pages:LoginPage}" />
+            <ShellContent Title="注册" Icon="register.png" ContentTemplate="{DataTemplate pages:RegisterPage}" />
+            <ShellContent Title="登录" Icon="login.png" ContentTemplate="{DataTemplate pages:LoginPage}" />
         </Tab>
     </FlyoutItem>
+    <!--选项卡-->
+    
+    <!--菜单栏模板-->
+    <Shell.Resources>
+        <ResourceDictionary>
+            <!-- 引用MenuTemplate.xaml文件 -->
+            <views:MenuItemTemplate x:Key="BaseMenuItemplate" />
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <MenuItem Text="Help"
+              IconImageSource="help.png"
+              Command="{Binding HelpCommand}"
+              CommandParameter="https://learn.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell" />
+
+
+    <Shell.FlyoutBackdrop>
+        <LinearGradientBrush StartPoint="0,0"
+                             EndPoint="1,1">
+            <GradientStop Color="#8A2387"
+                          Offset="0.1" />
+            <GradientStop Color="#E94057"
+                          Offset="0.6" />
+            <GradientStop Color="#F27121"
+                          Offset="1.0" />
+        </LinearGradientBrush>
+    </Shell.FlyoutBackdrop>
+    <!--页脚部分-->
     <Shell.FlyoutFooterTemplate>
         <DataTemplate>
             <views:FlyoutFooterView/>
         </DataTemplate>
     </Shell.FlyoutFooterTemplate>
-
 </Shell>

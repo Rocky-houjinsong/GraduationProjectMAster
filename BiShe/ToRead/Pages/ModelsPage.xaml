@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToRead.Pages.ModelsPage"
+             Title="模块样例">
+<!--其他类库的对象,需要在命名空间处声明-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <Button
+            x:Name="NavigationByButton"
+            Text="跳转功能"
+            Grid.Row="0" Grid.Column="0"
+            Clicked="NavigationByButtonClicked"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"/>
+        <Button
+            x:Name="MarkupExtensionsByButton"
+            Text="标记扩展"
+            Grid.Row="0" Grid.Column="1"
+            Clicked="MarkupExtensionsByButtonClicked"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"/>
+        <Button
+            x:Name="View2ViewDataBindingByButton"
+            Text="视图到视图的数据绑定"
+            Grid.Row="0" Grid.Column="2"
+            Clicked="View2ViewDataBindingByButtonClicked"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"/>
+        <Button
+            x:Name="DataBindingModeByButton"
+            Text="数据绑定模式"
+            Grid.Row="1" Grid.Column="0"
+            Clicked="DataBindingModeByButtonClicked"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"/>
+        <Button
+            x:Name="DataBindingCollectionsByButton"
+            Text="绑定集合"
+            Grid.Row="1" Grid.Column="1"
+            Clicked="DataBindingCollectionsByButtonClicked"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"/>
+        <Button
+            x:Name="SimpleMVVMByButton"
+            Text="简单MVVM"
+            Grid.Row="1" Grid.Column="2"
+            Clicked="SimpleMVVMByButtonByButtonClicked"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"/>
+        <Button
+            x:Name="SimpleMVVMByClockByButton"
+            Text="优化简单MVVM"
+            Grid.Row="2" Grid.Column="0"
+            Clicked="SimpleMVVMByClockByButtonClicked"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"/>
+
+        <Button
+            x:Name="InteractiveMVVMByButton"
+            Text="交互式MVVM"
+            Grid.Row="2" Grid.Column="1"
+            Clicked="InteractiveMVVMByButtonClicked"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"/>
+        <Button
+            x:Name="KeypadMVVMByButton"
+            Text="命令Commanding"
+            Grid.Row="2" Grid.Column="2"
+            Clicked="KeypadMVVMByButton_OnClickedeypadMVVMByButtonClicked"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"/>
+
+    </Grid>
+</ContentPage>

@@ -13,4 +13,6 @@ public interface IPoetryStorage
 
     Task<IEnumerable<Poetry>> GetPoetriesAsync(
         Expression<Func<Poetry, bool>> where, int skip, int take);
+
+    Task AddPoetryAsync(TodayPoetry poetry);
 }

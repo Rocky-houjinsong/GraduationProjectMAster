@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToRead.Modules.Pages.DataBindingModePage"
+             Title="DataBindingModePage">
+    <!--本文件 研究 绑定模式 BindingMode -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <!-- 缩放和旋转 的 标签 -->
+        <Label x:Name="label"
+               Text="TEXT"
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand" />
+
+        <!-- 滑块   和   标识缩放标签 -->
+        <!--Scale是 Label的缩放属性-->
+        <Slider x:Name="scaleSlider"
+                BindingContext="{x:Reference label}"
+                Value="{Binding Path=Scale, Mode=TwoWay}" 
+                Grid.Row="1" Grid.Column="0"
+                Maximum="10"/>
+        <!--Label标签 仅显示Slider的值,绑定模式默认,可不写,不是重点,故忽略-->
+        <Label BindingContext="{x:Reference scaleSlider}"
+               Text="{Binding Value, StringFormat='Scale = {0:F1}'}"
+               Grid.Row="1" Grid.Column="1"
+               VerticalTextAlignment="Center" />
+
+        <!-- 滑块  和   识别旋转标签 -->
+        <!--Rotation是 Label的旋转属性-->
+        <Slider x:Name="rotationSlider"
+                BindingContext="{x:Reference label}"
+                Grid.Row="2" Grid.Column="0"
+                Maximum="360"
+                Value="{Binding Rotation, Mode=OneWayToSource}" />
+        <Label BindingContext="{x:Reference rotationSlider}"
+               Text="{Binding Value, StringFormat='Rotation = {0:F0}'}"
+               Grid.Row="2" Grid.Column="1"
+               VerticalTextAlignment="Center" />
+
+        <!-- 滑块 和 标识RotationX的标签 -->
+        <Slider x:Name="rotationXSlider"
+                BindingContext="{x:Reference label}"
+                Grid.Row="3" Grid.Column="0"
+                Maximum="360"
+                Value="{Binding RotationX, Mode=OneWayToSource}" />
+        <Label BindingContext="{x:Reference rotationXSlider}"
+               Text="{Binding Value, StringFormat='RotationX = {0:F0}'}"
+               Grid.Row="3" Grid.Column="1"
+               VerticalTextAlignment="Center" />
+
+        <!-- Slider and identifying Label for RotationY -->
+        <Slider x:Name="rotationYSlider"
+                BindingContext="{x:Reference label}"
+                Grid.Row="4" Grid.Column="0"
+                Maximum="360"
+                Value="{Binding RotationY, Mode=OneWayToSource}" />
+        <Label BindingContext="{x:Reference rotationYSlider}"
+               Text="{Binding Value, StringFormat='RotationY = {0:F0}'}"
+               Grid.Row="4" Grid.Column="1"
+               VerticalTextAlignment="Center" />
+    </Grid>
+</ContentPage>

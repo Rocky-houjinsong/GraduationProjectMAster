@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:ToRead.Modules.ViewModels"
+             x:Class="ToRead.Modules.Pages.InteractiveMVVMPage"
+             Title="InteractiveMVVMPage">
+    <ContentPage.BindingContext>
+        <viewModels:HslViewModel Color="Aqua" />
+    </ContentPage.BindingContext>
+    <!--在本例中，对“色调”、“饱和度”和“亮度”属性的更改会导致“颜色”属性更改，
+    而对“颜色”特性的更改则会导致其他三个属性更改。这可能看起来像是一个无限循环，
+    只是视图模型不会调用PropertyChanged事件，除非属性发生了更改。
+    以下XAML示例包含一个BoxView，其Color属性绑定到视图模型的Color属性，
+    以及三个Slider和三个Label视图绑定到Hue、Saturation和Luminosity属性-->
+    <VerticalStackLayout Padding="10, 0, 10, 30">
+        <BoxView Color="{Binding Color}"
+                 HeightRequest="100"
+                 WidthRequest="100"
+                 HorizontalOptions="Center" />
+        <Label Text="{Binding Hue, StringFormat='Hue = {0:F2}'}"
+               HorizontalOptions="Center" />
+        <!--每个标签Label上的绑定是默认的单向。它只需要显示值。
+        但是，每个Slider上的默认绑定是TwoWay。这允许从视图模型中初始化Slider。
+        当视图模型被实例化时，它的“颜色”属性被设置为“浅绿色”。
+        Slider中的更改将为视图模型中的特性设置一个新值，然后视图模型将计算一个新颜色：-->
+        <Slider Value="{Binding Hue}"
+                Margin="20,0,20,0" />
+        <Label Text="{Binding Saturation, StringFormat='Saturation = {0:F2}'}"
+               HorizontalOptions="Center" />
+        <Slider Value="{Binding Saturation,Mode=TwoWay}"
+                Margin="20,0,20,0" />
+        <Label Text="{Binding Luminosity, StringFormat='Luminosity = {0:F2}'}"
+               HorizontalOptions="Center" />
+        <Slider Value="{Binding Luminosity}"
+                Margin="20,0,20,0" />
+    </VerticalStackLayout>
+</ContentPage>

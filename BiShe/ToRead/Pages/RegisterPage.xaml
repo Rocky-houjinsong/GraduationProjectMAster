@@ -8,7 +8,9 @@
     <VerticalStackLayout>
         <Button
             Text="注册"
+            x:Name="RegisterButton"
             VerticalOptions="Center"
-            HorizontalOptions="Center"/>
+            HorizontalOptions="Center"
+            Clicked="RegisterButton_OnClicked"/>
     </VerticalStackLayout>
 </ContentPage>

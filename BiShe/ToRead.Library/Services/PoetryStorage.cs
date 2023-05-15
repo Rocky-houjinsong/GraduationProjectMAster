@@ -52,6 +52,24 @@ public class PoetryStorage : IPoetryStorage
         await Connection.Table<Poetry>().Where(where).Skip(skip).Take(take)
             .ToListAsync();
 
+    //TODO 实现 从 云端添加的方法
+    public async Task AddPoetryAsync(TodayPoetry poetry)
+    {
+        var poetrylast = await Connection.Table<Poetry>().OrderByDescending(p => p.Id).FirstOrDefaultAsync();
+        int lastId = poetrylast.Id + 1;
+
+        var poetryinsert = new Poetry
+        {
+            Id = lastId,
+            Name = poetry.Name,
+            Author = poetry.Author,
+            Dynasty = poetry.Dynasty,
+            Content = poetry.Content
+        };
+        await Connection.InsertAllAsync(new[] { poetryinsert });
+    }
+
+
     public async Task CloseAsync() => await Connection.CloseAsync();
 }
 

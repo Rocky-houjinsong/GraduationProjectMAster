@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behavior="clr-namespace:ToRead.Modules.Behavior"
+             x:Class="ToRead.Modules.Pages.AttachedBehaviorsPage"
+             Title="AttachedBehaviorsPage">
+    <VerticalStackLayout>
+        <!--附加行为-->
+        <Entry Placeholder="Enter a System.Double" behavior:AttachedNumericValidationBehavior.AttachBehavior="true" />
+        <Entry Placeholder="Enter a System.Double" behavior:AttachedNumericValidationBehavior.AttachBehavior="false" />
+        <!--MAUI行为-->
+        <Entry Placeholder="Enter a System.Double">
+            <Entry.Behaviors>
+                <behavior:NumericValidationBehavior />
+            </Entry.Behaviors>
+        </Entry>
+        <!--通过样式,使用.NET MAUI行为 编写到Style文件中-->
+
+        <!--Style可以通过使用标记扩展将其Style属性设置为 样式来StaticResource应用于 Entry ：-->
+        <Entry Placeholder="Enter a System.Double" Style="{StaticResource NumericValidationStyle}"/>
+    </VerticalStackLayout>
+</ContentPage>

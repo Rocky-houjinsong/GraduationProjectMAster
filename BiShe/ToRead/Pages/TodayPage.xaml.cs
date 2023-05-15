@@ -2,8 +2,8 @@
 
 public partial class TodayPage : ContentPage
 {
-	public TodayPage()
-	{
-		InitializeComponent();
-	}
+    public TodayPage()
+    {
+        InitializeComponent();
+    }
 }

@@ -30,6 +30,12 @@ public class ServiceLocator
     public AboutPageViewModel AboutPageViewModel =>
         _serviceProvider.GetService<AboutPageViewModel>();
 
+    public LoginPageViewModel LoginPageViewModel =>
+        _serviceProvider.GetService<LoginPageViewModel>();
+
+    public RegisterPageViewModel RegisterPageViewModel =>
+        _serviceProvider.GetService<RegisterPageViewModel>();
+
     public IRouteService RouteService =>
         _serviceProvider.GetService<IRouteService>();
 
@@ -74,7 +80,8 @@ public class ServiceLocator
         serviceCollection.AddSingleton<DetailPageViewModelProxy>();
         serviceCollection.AddSingleton<FavoritePageViewModel>();
         serviceCollection.AddSingleton<AboutPageViewModel>();
-
+        serviceCollection.AddSingleton<LoginPageViewModel>();
+        serviceCollection.AddSingleton<RegisterPageViewModel>();
         serviceCollection.AddSingleton<IFavoriteStorage, FavoriteStorage>();
         serviceCollection
             .AddSingleton<IInitializationNavigationService,

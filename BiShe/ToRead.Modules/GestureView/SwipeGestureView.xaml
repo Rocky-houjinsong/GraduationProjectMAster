@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helpers="clr-namespace:ToRead.Modules.Helpers"
+             x:Class="ToRead.Modules.GestureView.SwipeGestureView"
+             Title="SwipeGestureView">
+    <VerticalStackLayout>
+        <!-- <SwipeGestureRecognizer Direction="Left,Right" Swiped="OnSwiped"/> -->
+        <BoxView Color="Teal"  WidthRequest="200" HeightRequest="100">
+            <BoxView.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Left,Right" Swiped="OnSwiped"/>
+
+            </BoxView.GestureRecognizers>
+        </BoxView>
+
+        <helpers:SwipeContainer Swipe="OnSwiped" >
+            <BoxView Color="GreenYellow" WidthRequest="200" HeightRequest="100" />
+        </helpers:SwipeContainer>
+    </VerticalStackLayout>
+</ContentPage>
