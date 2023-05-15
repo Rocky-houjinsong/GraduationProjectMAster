@@ -5,6 +5,7 @@ namespace ToRead;
 
 public partial class AppShell : Shell
 {
+    //TODO 页面管理
     public AppShell()
     {
         InitializeComponent();
@@ -42,6 +43,12 @@ public partial class AppShell : Shell
         AddFlyoutItem("关于",
             routeService.GetRoute(RootNavigationConstant.AboutPage),
             typeof(AboutPage));
+        AddFlyoutItem("登录",
+            routeService.GetRoute(RootNavigationConstant.LoginPage),
+            typeof(LoginPage));
+        AddFlyoutItem("注册",
+            routeService.GetRoute(RootNavigationConstant.RegisterPage),
+            typeof(RegisterPage));
     }
 
     /// <summary>

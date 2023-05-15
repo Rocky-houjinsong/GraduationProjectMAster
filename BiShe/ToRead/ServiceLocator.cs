@@ -1,8 +1,10 @@
-﻿using ToRead.Services;
+﻿using Microsoft.Extensions.DependencyInjection;
+using ToRead.Services;
 using ToRead.ViewModels;
 
 namespace ToRead;
 
+//TODO 服务容器
 public class ServiceLocator
 {
     private IServiceProvider _serviceProvider;
@@ -40,6 +42,12 @@ public class ServiceLocator
     public IInitializationNavigationService InitializationNavigationService =>
         _serviceProvider.GetService<IInitializationNavigationService>();
 
+    public LoginPageViewModel LoginPageViewModel =>
+        _serviceProvider.GetService<LoginPageViewModel>();
+
+    public RegisterPageViewModel RegisterPageViewModel =>
+        _serviceProvider.GetService<RegisterPageViewModel>();
+
     public ServiceLocator()
     {
         var serviceCollection = new ServiceCollection();
@@ -71,6 +79,8 @@ public class ServiceLocator
         serviceCollection.AddSingleton<DetailPageViewModelProxy>();
         serviceCollection.AddSingleton<FavoritePageViewModel>();
         serviceCollection.AddSingleton<AboutPageViewModel>();
+        serviceCollection.AddSingleton<LoginPageViewModel>();
+        serviceCollection.AddSingleton<RegisterPageViewModel>();
 
         serviceCollection.AddSingleton<IFavoriteStorage, FavoriteStorage>();
         serviceCollection
