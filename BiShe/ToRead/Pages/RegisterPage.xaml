@@ -6,6 +6,9 @@
              BindingContext="{Binding RegisterPageViewModel, Source={StaticResource ServiceLocator}}"
              Title="RegisterPage">
     <VerticalStackLayout>
+        <Entry Placeholder="Email" Text="{Binding Email}" />
+        <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}" />
+        <Entry Placeholder="ConfirmPassword" IsPassword="True" Text="{Binding ConfirmPassword}" />
         <Button
             Text="注册"
             x:Name="RegisterButton"

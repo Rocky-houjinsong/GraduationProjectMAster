@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using ToRead.RESTAPI.Model;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ToRead.RESTAPI.Data;
 using ToRead.RESTAPI.Models;
-using ToRead.RESTAPI.Services;
 
 namespace ToRead.RESTAPI.Controllers;
 
@@ -10,78 +9,45 @@ namespace ToRead.RESTAPI.Controllers;
 [ApiController]
 public class AuthenticationController : ControllerBase
 {
-    private readonly UserManager<User> _userManager;
-    private readonly SignInManager<User> _signInManager;
-    private readonly JwtService _jwtService;
+    private readonly UserContext _context;
 
-    public AuthenticationController(
-        UserManager<User> userManager,
-        SignInManager<User> signInManager,
-        JwtService jwtService)
+    public AuthenticationController(UserContext context)
     {
-        _userManager = userManager;
-        _signInManager = signInManager;
-        _jwtService = jwtService;
+        _context = context;
     }
 
     /// <summary>
-    /// 添加 [FromBody] 特性来将请求主体反序列化为 RegisterModel 对象
-    /// 处理 POST /api/auth/register 路径上的请求，并从请求正文中获取 JSON 数据并将其转换成 RegisterModel 对象
+    /// 注册方法接收一个用户对象作参数，并将其添加到数据库中保存
     /// </summary>
-    /// <param name="model"></param>
-    /// <returns></returns>
     [HttpPost("register")]
-    public async Task<ActionResult<string>> Register([FromBody] RegisterModel model)
+    public async Task<IActionResult> Register([FromBody] User user)
     {
-        // Validate email and password
-        if (string.IsNullOrWhiteSpace(model.Email) || !IsValidEmail(model.Email))
+        if (user == null)
         {
-            return BadRequest("Invalid email address");
+            return BadRequest("Invalid client request");
         }
 
-        if (string.IsNullOrWhiteSpace(model.Password) || model.Password.Length < 6)
-        {
-            return BadRequest("Password must be at least 6 characters long");
-        }
+        _context.Users.Add(user);
+        await _context.SaveChangesAsync();
 
-        // Create user account
-        var user = new User { UserName = model.Email, Email = model.Email };
-        var result = await _userManager.CreateAsync(user, model.Password);
-
-        // Check if user was created successfully
-        if (!result.Succeeded)
-        {
-            return BadRequest(result.Errors.FirstOrDefault()?.Description);
-        }
-
-        var token = _jwtService.GenerateToken(user);
-        return Ok(token);
+        return Ok(new { Message = "User registered successfully!" });
     }
 
-    private bool IsValidEmail(string email)
-    {
-        try
-        {
-            var addr = new System.Net.Mail.MailAddress(email);
-            return addr.Address == email;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-
+    /// <summary>
+    /// 登录方法接收一个用户对象作参数，并使用Entity Framework Core从数据库中查找该用户。
+    /// 找到，返回“用户登录成功！”；否则返回“无效的客户端请求”。
+    /// </summary>
     [HttpPost("login")]
-    public async Task<ActionResult<string>> Login([FromBody] LoginModel model)
+    public async Task<IActionResult> Login([FromBody] User user)
     {
-        // Verify email and password
-        var user = await _userManager.FindByNameAsync(model.Email);
-        if (user == null) return BadRequest("Invalid email or password.");
+        var existingUser =
+            await _context.Users.FirstOrDefaultAsync(u => u.Email == user.Email && u.Password == user.Password);
 
-        var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
-        if (!result.Succeeded) return BadRequest("Invalid email or password.");
-        // Generate JWT token
-        var token = _jwtService.GenerateToken(user);
-        return Ok(token);
+        if (existingUser == null)
+        {
+            return BadRequest("Invalid client request");
+        }
+
+        return Ok(new { Message = "User logged in successfully!" });
     }
 }

@@ -9,6 +9,6 @@ public partial class RegisterPage : ContentPage
 
     private void RegisterButton_OnClicked(object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        DisplayAlert("无法注册", "未链接数据库服务,", "OK");
     }
 }

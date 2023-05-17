@@ -1,6 +1,5 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using DeviceAPI.Services;
 using MvvmHelpers.Commands;
 using ToRead.Models;
 using ToRead.Services;
@@ -58,7 +57,7 @@ public class TodayPageViewModel : ObservableObject
             new Lazy<AsyncRelayCommand>(
                 new AsyncRelayCommand(ExecuteInsertCommand));*/
 
-        ShareCommand = new Command(ExecuteShareCommand);
+        //  ShareCommand = new Command(ExecuteShareCommand);
         //DownloadCommand = new Command(ExecuteInsertCommand);
     }
 
@@ -102,7 +101,7 @@ public class TodayPageViewModel : ObservableObject
             IsLoading = true;
             TodayPoetry = await _todayPoetryService.GetTodayPoetryAsync();
             IsLoading = false;
-            _objectValue = "https://www.jinrishici.com";
+            // _objectValue = "https://www.jinrishici.com";
         });
     }
 
@@ -149,6 +148,7 @@ public class TodayPageViewModel : ObservableObject
 
     // -------------- 2023年5月16日01:43:27 Command添加 
 
+    /*
     private object _objectValue;
 
     public object ObjectValue
@@ -169,7 +169,7 @@ public class TodayPageViewModel : ObservableObject
                 Title = "Share Object Value"
             });
         }
-    }
+    }*/
 
     /*public Command DownloadCommand { get; }
 

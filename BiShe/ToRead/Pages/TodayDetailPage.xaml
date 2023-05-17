@@ -1,5 +1,4 @@
-﻿<?xml version="1.0"
-      encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -34,9 +33,12 @@
             <Button HorizontalOptions="Center"
                     Text="在本地数据库中查找"
                     Command="{Binding QueryCommand}" />
-            <Button HorizontalOptions="Center"
-                    Text="下载到本地数据库中"/>
-                    <!--Command="{Binding ExecuteInsertCommand}">-->
+            <Button Margin="0,0,0,8"
+                    Text="分享" />
+                    <!--Clicked="ShareClicked"/>-->
+                    <!--Command="{Binding ShareCommand}" 
+                    CommandParameter="{Binding ObjectValue}"-->
+            <!--Command="{Binding ExecuteInsertCommand}">-->
             
             <!--此处,添加新命令,作用是 拉取到 数据,然后加载到里面-->
 

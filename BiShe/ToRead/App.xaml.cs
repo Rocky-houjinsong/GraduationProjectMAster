@@ -1,4 +1,6 @@
-﻿namespace ToRead;
+﻿using ToRead.Services;
+
+namespace ToRead;
 
 public partial class App : Application
 {
@@ -10,9 +12,9 @@ public partial class App : Application
         //MainPage = new  AppShell();
         //改用 MAUI原有的导航机制,自建导航栈
         MainPage = new NavigationPage(new ContentPage());
+        //Mock工具进行管理
+        DependencyService.Register<MockDataStore>();
 
-
-        #region 自建依赖容器
 
         //获取自建 依赖容器名
         var serviceLocatorName = nameof(ServiceLocator);
@@ -34,11 +36,5 @@ public partial class App : Application
         {
             initializationNavigationService.NavigateToAppShell();
         }
-
-        #endregion
-
-        #region 系统API服务
-
-        #endregion
     }
 }

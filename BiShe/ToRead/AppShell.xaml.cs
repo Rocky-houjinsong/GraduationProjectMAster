@@ -9,6 +9,8 @@ public partial class AppShell : Shell
     public AppShell()
     {
         InitializeComponent();
+        Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
+        Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
 
         var serviceLocatorName = nameof(ServiceLocator);
         var serviceLocator =
@@ -43,12 +45,6 @@ public partial class AppShell : Shell
         AddFlyoutItem("关于",
             routeService.GetRoute(RootNavigationConstant.AboutPage),
             typeof(AboutPage), "about.png");
-        /*AddFlyoutItem("登录",
-            routeService.GetRoute(RootNavigationConstant.LoginPage),
-            typeof(LoginPage), "login.png");
-        AddFlyoutItem("注册",
-            routeService.GetRoute(RootNavigationConstant.RegisterPage),
-            typeof(RegisterPage), "register.png");*/
     }
 
     /// <summary>

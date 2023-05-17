@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToRead.Pages.ControlsPage"
+             BindingContext="{Binding ControlsPageViewModel , Source={StaticResource ViewModelLocator}}"
+             Title="ControlsPage">
+    <!--第三步,在 MainPage这个View中进行绑定数据源-->
+    <ContentPage.Content>
+        <StackLayout>
+            <!--Grid是表格控件-->
+            <Grid>
+                <ScrollView>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <!--To Do-->
+                        <Label Text="Grid:"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="8" />
+                        <!--定义Grid,先行row定义,再 column定义 3行,3列,但每列的大小不一样-->
+                        <Grid  Grid.Row="0"  
+                               Grid.Column="1"
+                               Margin="8">
+                            <Grid.RowDefinitions>
+                                <!--定义行,每行高度自动变化,默认三行1列-->
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <!--列定义,*号定义语法,第一个列占2/6-->
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <!-- 先定义对象,再放进去-->
+                            <!--字有些大,改变原有的高度,将一行一列改为一行跨3列-->
+                            <!--设置边距Margin变大,4的倍数
+                            微软技术 有效像素 4px的倍数
+                            字号不需要这般设置-->
+                            <Label  Text="ACME Sales Corp"
+                                    FontSize="24" 
+                                    Margin="4"
+                                    Grid.ColumnSpan="3"/>
+                            <!--默认控件放在第0行第0列,显式说明存放位置-->
+                            <Label  Text="账户"
+                                    Grid.Row="1"
+                                    Grid.Column="0" 
+                                    VerticalOptions="Center"/>
+                            <!-- 默认顶端对其,很丑,修改布局 垂直方向居中对齐,将其参照所在表格居中对其-->
+                            <Entry Grid.Row="1"
+                                   Grid.Column="1"
+                                   Margin="4"/>
+                            <Label  Text="密码"
+                                    Grid.Row="2"
+                                    Grid.Column="0" 
+                                    VerticalOptions="Center"/>
+                            <Entry Grid.Row="2"
+                                   Grid.Column="1"
+                                   Margin="4"/>
+                            <Button Grid.Row="3"
+                                    Grid.Column="0"
+                                    Text="注册"
+                                    Margin="16"/>
+                            <Button Grid.Row="3"
+                                    Grid.Column="1"
+                                    Text="登录"
+                                    Margin="20"/>
+                        </Grid>
+                        <!-- 第二种布局,线性布局-->
+                        <Label  Text="StackLayout:"
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Margin="8" />
+                        <!-- spacing 线条,orientation 布局垂直还是水平
+                        垂直布局时,宽好用,高不好用,水平布局,宽和高都好用-->
+                        <StackLayout    Grid.Row="1"
+                                        Grid.Column="1"
+                                        Margin="8"
+                                        Spacing="0"
+                                        Orientation="Horizontal">
+                            <BoxView Color="Blue"
+                                     WidthRequest="50"
+                                     HeightRequest="50" />
+                            <!--发现上下两个色块之间有间隙,这个就是线性布局的线条,可以设置spacing=0-->
+                            <BoxView Color="Red"
+                                     WidthRequest="50"
+                                     HeightRequest="50" />
+                            <!-- stacklayout 可以任意嵌套-->
+                            <StackLayout Orientation="Vertical"
+                                         Spacing="0" >
+                                <BoxView Color="Yellow"
+                                         WidthRequest="50"
+                                         HeightRequest="25" />
+                                <BoxView Color="Green"
+                                         WidthRequest="50"
+                                         HeightRequest="25" />
+                            </StackLayout>
+
+                        </StackLayout>
+
+                        <Label  Text="ScrollViewer:"
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                Margin="8" />
+                        <!--01 图片资源存放问题
+                        强制 高度和-->
+                        <ScrollView Grid.Row="2"
+                                    Grid.Column="1"
+                                    HeightRequest="75"
+                                    WidthRequest="200" >
+                            <Image  Source="index.png" />
+                        </ScrollView>
+                        <!--可点击的触发帮助链接的按钮,示例是label
+                        下划线属性-->
+                        <Label  Text="hyperlinkButton:"
+                                Grid.Row="3"
+                                Grid.Column="0"
+                                Margin="8" />
+                        <Label  Grid.Row="3"
+                                Grid.Column="1"
+                                Text="帮助"
+                                TextColor="Blue" 
+                                x:Name="ClickHyperlinkButton"
+                                Margin="8"
+                                TextDecorations="Underline">
+                            <!--Label本身是不可以被点击的,需要进行方法扩展 
+                            其中一个方法 就是手势识别 GestureRecongizers-->
+                            <Label.GestureRecognizers>
+                                <!--Tap 点击的意思-->
+                                <TapGestureRecognizer Tapped="ClickHyperlinkButton_Tapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                        <Label  Text="Pop-up:"
+                                Grid.Row="4"
+                                Grid.Column="0"
+                                Margin="8" />
+                        <Button x:Name="MyPopupButton"
+                                Margin="8"
+                                Grid.Row="4"
+                                Grid.Column="1"
+                                Text="Show Pop-up" 
+                                Clicked="MyPopupButton_Clicked"/>
+                        <Label  Text="Switch:"
+                                Grid.Row="5"
+                                Grid.Column="0"
+                                Margin="8" />
+                        <Switch Grid.Row="5"
+                                Grid.Column="1"
+                                Margin="8" 
+                                HorizontalOptions="Start"/>
+                        <!--滚动条,数据绑定-->
+                        <Label  Text="Slider"
+                                Grid.Row="6"
+                                Grid.Column="0"
+                                Margin="8"/>
+                        <StackLayout Grid.Row="6"
+                                     Grid.Column="1"
+                                     Orientation="Horizontal">
+                            <Slider x:Name="MySlider"
+                                    Margin="1"
+                                    HorizontalOptions="Start" 
+                                    Maximum="100"
+                                    Minimum="0"
+                                    WidthRequest="200" />
+                            <Label Margin="2,0,0,0"
+                                   Text="{Binding Value,Source={x:Reference MySlider}}" 
+                                   VerticalOptions="Center"/>
+                        </StackLayout>
+
+                        <StackLayout Grid.Row="7"
+                                     Grid.Column="1">
+                            <Label FontSize="10"
+                                   Text="{Binding Result}"
+                                   x:Name="ResultLabel" />
+                            <!--让Label的值绑定到MainPageModel中的Result-->
+                            <Button x:Name="ClickMeButton"
+                                    FontSize="17"
+                                    Command="{Binding HelloCommand}"
+                                    Text="Click Me!" />
+                        </StackLayout>
+                    </Grid>
+                </ScrollView>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

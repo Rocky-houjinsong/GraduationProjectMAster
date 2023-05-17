@@ -8,7 +8,7 @@
              Title="AboutPage">
     <ScrollView>
         <StackLayout Padding="8">
-            <Label Text="DailyPoetryX"
+            <Label Text="ToRead - .NET MAUI"
                    FontSize="28"
                    HorizontalOptions="Center"
                    Margin="0,0,0,16" />
@@ -30,6 +30,10 @@
                 </Label.GestureRecognizers>
                 关于必应，请访问 https://www.bing.com/
             </Label>
+            <Button Text="基础功能模块"
+                    Clicked="ModelsPageOnClieked"/>
+            <Button Text="基础控件"
+                    Clicked="ControlsPageOnClieked"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>

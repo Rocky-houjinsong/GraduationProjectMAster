@@ -20,19 +20,14 @@
     <!--与一个名为 D_FAULT_ShellContent2 的 ShellContent 有关。
      Microsoft.Maui.Controls.Xaml.dll 应该是用于为应用程序构建用户界面的库。
     根据异常信息，它指出 ShellContent 类型的 Content 属性应该是一个 Page 的实例-->
-    <TabBar Title="功能展示" Icon="code.png">
-        <Tab Title="基础模块">
-            <ShellContent ContentTemplate="{DataTemplate pages:ModelsPage}" />
-        </Tab>
-        <Tab Title="系统API">
-            <ShellContent ContentTemplate="{DataTemplate pages:ModelsPage}" />
-        </Tab>
-    </TabBar>
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Title="登录注册">
         <Tab Title="登录注册">
             <ShellContent Title="注册" Icon="register.png" ContentTemplate="{DataTemplate pages:RegisterPage}" />
             <ShellContent Title="登录" Icon="login.png" ContentTemplate="{DataTemplate pages:LoginPage}" />
         </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="Browse" Icon="icon_feed.png">
+        <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate pages:ItemsPage}" />
     </FlyoutItem>
     <!--选项卡-->
     
@@ -44,10 +39,12 @@
         </ResourceDictionary>
     </Shell.Resources>
 
+    <!--
     <MenuItem Text="Help"
               IconImageSource="help.png"
               Command="{Binding HelpCommand}"
               CommandParameter="https://learn.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell" />
+              -->
 
 
     <Shell.FlyoutBackdrop>
