@@ -11,7 +11,7 @@ public partial class TodayDetailPage : ContentPage
     }
 
 
-    /*private async void ShareClicked(object sender, EventArgs e)
+    private async void ShareClicked(object sender, EventArgs e)
     {
         try
         {
@@ -30,5 +30,5 @@ public partial class TodayDetailPage : ContentPage
             // 发生错误时，显示错误信息
             await DisplayAlert("Error", $"An error occurred while sharing: {ex.Message}", "OK");
         }
-    }*/
+    }
 }

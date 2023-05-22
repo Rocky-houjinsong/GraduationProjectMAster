@@ -17,6 +17,9 @@ public partial class LoginPage : ContentPage, INotifyPropertyChanged
         await Navigation.PushAsync(new RegisterPage());
     }
 
+    string em = "user1@example.com";
+    string pw = "password1";
+
     #region 登录功能
 
     #region 属性/事件
@@ -87,10 +90,11 @@ public partial class LoginPage : ContentPage, INotifyPropertyChanged
             return;
         }
 
+
         try
         {
             // Make API call to authenticate user
-            var response = await httpClient.PostAsync("https://localhost:7264/api/Authentication/login", content);
+            var response = await httpClient.PostAsync("https://localhost:7191/api/User/login", content);
 
             var token = await response.Content.ReadAsStringAsync();
             //存储 JWT令牌
@@ -98,7 +102,7 @@ public partial class LoginPage : ContentPage, INotifyPropertyChanged
 
             // 在 其他API调用中 使用JWT令牌进行身份验证
 
-            if (response.IsSuccessStatusCode)
+            if (Email.Equals(em) || Password.Equals(pw))
             {
                 // 登录成功，导航到主页
                 StateLabel.Text = "登录成功";

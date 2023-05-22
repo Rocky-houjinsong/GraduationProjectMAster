@@ -10,12 +10,8 @@
         <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}" />
         <Button Text="Login" Command="{Binding LoginCommand}" />
         <Label Text="{Binding ErrorMessage}" TextColor="Red" />
-        <Button      
-            Text="登录"
-            x:Name="LoginButton"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"
-            />
+       
+            
         <Button
             Text="注册"
             x:Name="RegisterButton"
